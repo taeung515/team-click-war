@@ -1,6 +1,7 @@
 package github.nbcamp.lectureflow.global.entity;
 
 
+import github.nbcamp.lectureflow.global.enums.Day;
 import github.nbcamp.lectureflow.global.enums.MajorOrGeneral;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -50,7 +51,7 @@ public class Lecture extends BaseEntity {
     //요일
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String day;
+    private Day day;
 
     //시작시간
     @Column(name = "start_time", nullable = false)
@@ -71,7 +72,7 @@ public class Lecture extends BaseEntity {
     @Column(name = "click_count")
     private int clickCount;
 
-    public static Lecture of(MajorOrGeneral majorOrGeneral, String department, int gradeLevel, boolean isForeign, String lectureName, int grade, String professor, LocalTime startTime, LocalTime endTime, String classroom, int maxStudent) {
+    public static Lecture of(MajorOrGeneral majorOrGeneral, String department, int gradeLevel, boolean isForeign, String lectureName, int grade, String professor, Day day, LocalTime startTime, LocalTime endTime, String classroom, int maxStudent) {
         Lecture lecture = new Lecture();
         lecture.majorOrGeneral = majorOrGeneral;
         lecture.department = department;
@@ -80,10 +81,12 @@ public class Lecture extends BaseEntity {
         lecture.lectureName = lectureName;
         lecture.grade = grade;
         lecture.professor = professor;
+        lecture.day = day;
         lecture.startTime = startTime;
         lecture.endTime = endTime;
         lecture.classroom = classroom;
         lecture.maxStudent = maxStudent;
+        lecture.clickCount = 0;
 
         return lecture;
     }
