@@ -28,4 +28,13 @@ public class LectureMember extends BaseEntity {
     // 재수강 여부
     @Column(nullable=false)
     private boolean isRetake=false;
+
+    //정적 팩토리 메서드
+    public static LectureMember of(Member member, Lecture lecture, boolean isRetake) {
+        LectureMember lectureMember = new LectureMember();
+        lectureMember.member = member;
+        lectureMember.lecture = lecture;
+        lectureMember.isRetake = isRetake;
+        return lectureMember;
+    }
 }
