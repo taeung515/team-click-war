@@ -52,6 +52,12 @@ dependencies {
     // security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.security:spring-security-test'
+
+    //EXEL....
+    implementation 'org.apache.poi:poi:5.4.0'
+    implementation 'org.apache.poi:poi-ooxml:5.4.0'
+    implementation 'com.opencsv:opencsv:5.10'
+
 }
 
 tasks.named('test') {
