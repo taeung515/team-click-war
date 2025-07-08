@@ -2,11 +2,15 @@ package github.nbcamp.lectureflow.global.entity;
 
 import github.nbcamp.lectureflow.domain.user.enums.Role;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;//추가
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)//추가
 @Table(name = "members")
+
 public class Member extends BaseEntity {
 
     //고유 식별자
@@ -54,10 +58,5 @@ public class Member extends BaseEntity {
     public void updateInfo(String name, String phone) {
         this.name = name;
         this.phone = phone;
-    }
-
-    //관리자 여부 확인
-    public boolean isAdmin() {
-        return this.role == Role.ADMIN;
     }
 }
