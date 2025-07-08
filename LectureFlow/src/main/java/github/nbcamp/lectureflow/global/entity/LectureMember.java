@@ -27,14 +27,24 @@ public class LectureMember extends BaseEntity {
 
     // 재수강 여부
     @Column(nullable=false)
-    private boolean isRetake=false;
+    private boolean isRetake;
 
-    //정적 팩토리 메서드
-    public static LectureMember of(Member member, Lecture lecture, boolean isRetake) {
+    /**
+     * 정적 팩토리 메서드
+     * 재수강 여부는 기본적으로 false.
+     */
+    public static LectureMember of(Member member, Lecture lecture) {
         LectureMember lectureMember = new LectureMember();
         lectureMember.member = member;
         lectureMember.lecture = lecture;
-        lectureMember.isRetake = isRetake;
+        lectureMember.isRetake=false;
         return lectureMember;
+    }
+
+    /**
+     *     재수강인 경우 true로 변경(default false)
+     */
+    public void updateRetake(){
+        this.isRetake=true;
     }
 }
