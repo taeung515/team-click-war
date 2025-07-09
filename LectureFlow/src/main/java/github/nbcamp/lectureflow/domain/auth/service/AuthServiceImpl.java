@@ -3,6 +3,7 @@ package github.nbcamp.lectureflow.domain.auth.service;
 import github.nbcamp.lectureflow.domain.auth.dto.request.SigninRequest;
 import github.nbcamp.lectureflow.domain.auth.dto.request.SignupRequest;
 import github.nbcamp.lectureflow.domain.auth.dto.response.SigninResponse;
+import github.nbcamp.lectureflow.domain.auth.dto.response.SignupResponse;
 import github.nbcamp.lectureflow.domain.auth.exception.AuthException;
 import github.nbcamp.lectureflow.domain.auth.repository.AuthRepository;
 import github.nbcamp.lectureflow.global.entity.Member;
@@ -23,7 +24,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     @Transactional
-    public Long signup(SignupRequest request) {
+    public SignupResponse signup(SignupRequest request) {
         if (authRepository.existsByEmail(request.getEmail())) {
             throw new AuthException(ErrorCode.DUPLICATE_EMAIL);
         }
@@ -37,7 +38,7 @@ public class AuthServiceImpl implements AuthService {
         );
 
         Member saved = authRepository.save(member);
-        return saved.getId();
+        return SignupResponse.of(saved.getId());
     }
 
     @Override

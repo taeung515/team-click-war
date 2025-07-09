@@ -3,6 +3,7 @@ package github.nbcamp.lectureflow.domain.auth.service;
 import github.nbcamp.lectureflow.domain.auth.dto.request.SigninRequest;
 import github.nbcamp.lectureflow.domain.auth.dto.request.SignupRequest;
 import github.nbcamp.lectureflow.domain.auth.dto.response.SigninResponse;
+import github.nbcamp.lectureflow.domain.auth.dto.response.SignupResponse;
 import github.nbcamp.lectureflow.domain.auth.exception.AuthException;
 import github.nbcamp.lectureflow.domain.auth.repository.AuthRepository;
 import github.nbcamp.lectureflow.domain.user.enums.Role;
@@ -45,9 +46,9 @@ class AuthServiceImplTest {
         given(authRepository.save(any())).willReturn(member);
         given(passwordEncoder.encode(anyString())).willReturn("encodedPassword");
         // when
-        Long signup = authService.signup(request);
+        SignupResponse response = authService.signup(request);
         // then
-        assertNotNull(signup);
+        assertNotNull(response);
     }
 
     @Test
