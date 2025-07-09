@@ -39,12 +39,12 @@ public class JwtUtil {
                 .getBody();
     }
 
-    public String generateToken(Long userId, String username, Role memberRole) {
+    public String generateToken(Long memberId, String name, Role memberRole) {
         Date date = new Date();
 
         return Jwts.builder()
-                .setSubject(username)
-                .claim("userId", userId)
+                .setSubject(name)
+                .claim("memberId", memberId)
                 .claim("auth", memberRole)
                 .setExpiration(new Date(date.getTime() + TOKEN_TIME))
                 .setIssuedAt(date)
@@ -52,8 +52,8 @@ public class JwtUtil {
                 .compact();
     }
 
-    public Long extractUserId(String token) {
-        return extractAllClaims(token).get("userId", Long.class);
+    public Long extractMemberId(String token) {
+        return extractAllClaims(token).get("memberId", Long.class);
     }
 
     public String extractRoles(String token) {
