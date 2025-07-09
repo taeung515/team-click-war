@@ -2,6 +2,7 @@ package github.nbcamp.lectureflow.global.entity;
 
 
 import github.nbcamp.lectureflow.global.enums.Day;
+import github.nbcamp.lectureflow.global.enums.Department;
 import github.nbcamp.lectureflow.global.enums.MajorOrGeneral;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -26,7 +27,9 @@ public class Lecture extends BaseEntity {
     private MajorOrGeneral majorOrGeneral;
 
     //소속: 컴공, 또는 교양의 문화와 예술 등등..
-    private String department;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Department department;
 
     //학년
     @Column(name = "grade_level", nullable = false)
@@ -72,7 +75,7 @@ public class Lecture extends BaseEntity {
     @Column(name = "click_count")
     private int clickCount;
 
-    public static Lecture of(MajorOrGeneral majorOrGeneral, String department, int gradeLevel, boolean isForeign, String lectureName, int grade, String professor, Day day, LocalTime startTime, LocalTime endTime, String classroom, int maxStudent) {
+    public static Lecture of(MajorOrGeneral majorOrGeneral, Department department, int gradeLevel, boolean isForeign, String lectureName, int grade, String professor, Day day, LocalTime startTime, LocalTime endTime, String classroom, int maxStudent) {
         Lecture lecture = new Lecture();
         lecture.majorOrGeneral = majorOrGeneral;
         lecture.department = department;
