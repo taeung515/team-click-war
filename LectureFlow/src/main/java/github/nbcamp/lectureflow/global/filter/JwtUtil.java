@@ -23,8 +23,11 @@ public class JwtUtil {
     private long TOKEN_TIME;
     private Key key;
 
+    @Value("${app.jwt-secret}")
+    private String secretKey;
+
     @PostConstruct
-    public void init(@Value("${app.jwt-secret}") String secretKey) {
+    public void init() {
         byte[] bytes = Base64.getDecoder().decode(secretKey);
         key = Keys.hmacShaKeyFor(bytes);
     }
