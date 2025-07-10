@@ -1,15 +1,13 @@
 package github.nbcamp.lectureflow.domain.lecture.controller;
 
+import github.nbcamp.lectureflow.domain.lecture.dto.LectureRequestDto;
 import github.nbcamp.lectureflow.domain.lecture.service.LectureService;
 import github.nbcamp.lectureflow.domain.response.LectureResponse;
 import github.nbcamp.lectureflow.global.dto.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -21,12 +19,31 @@ import java.io.IOException;
 public class LectureController {
     private final LectureService lectureService;
 
-    @PostMapping("/lectures")
+    @PostMapping("/lectures/upload")
     public ResponseEntity<ApiResponse<Void>> createLectures(@RequestParam(value = "multipartFile") MultipartFile multipartFile) throws IOException {
-        lectureService.createLecture(multipartFile);
+        lectureService.createLectures(multipartFile);
 
-        return ResponseEntity.ok(ApiResponse.success(LectureResponse.Lecture_UPLOAD_SUCCESS.getMessage(), null));
+        return ResponseEntity.ok(ApiResponse.success(LectureResponse.LECTURE_UPLOAD_SUCCESS.getMessage(), null));
     }
 
+    @PostMapping("/lectures")
+    public ResponseEntity<ApiResponse<Void>> createLecture(@RequestBody LectureRequestDto.UploadDto uploadDto) {
+        lectureService.createLecture(uploadDto);
 
+        return ResponseEntity.ok(ApiResponse.success(LectureResponse.LECTURE_UPLOAD_SUCCESS.getMessage(), null));
+    }
+
+    @PatchMapping("/lectures/{lectureId}")
+    public ResponseEntity<ApiResponse<Void>> updateLectures(@RequestBody LectureRequestDto.UpdateDto updateDto, @PathVariable Long lectureId) {
+        lectureService.updateLecture(updateDto, lectureId);
+
+        return ResponseEntity.ok(ApiResponse.success(LectureResponse.LECTURE_UPDATE_SUCCESS.getMessage(), null));
+    }
+
+    @DeleteMapping("/lectures/{lectureId}")
+    public ResponseEntity<ApiResponse<Void>> deleteLectures(@PathVariable Long lectureId) {
+        lectureService.deleteLecture(lectureId);
+
+        return ResponseEntity.ok(ApiResponse.success(LectureResponse.LECTURE_DELETE_SUCCESS.getMessage(), null));
+    }
 }
