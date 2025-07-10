@@ -14,6 +14,10 @@ jobs:
     name: Build & Test
     runs-on: ubuntu-latest  # GitHub에서 제공하는 Ubuntu 서버에서 실행
 
+    defaults:
+      run:
+        working-directory: LectureFlow
+
     steps:
       # 레포지토리 코드 가져오기
       - name: Checkout Repository
