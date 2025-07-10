@@ -23,12 +23,10 @@ public enum ErrorCode {
     OVER_CAPACITY(HttpStatus.CONFLICT, "수강 정원이 마감되었습니다."),
     DUPLICATE_ENROLL(HttpStatus.BAD_REQUEST, "이미 수강 또는 재수강 완료한 강의입니다."),
 
-    //lecture
+
+    // lecture
     LECTURE_NOT_FOUND(HttpStatus.NOT_FOUND, "강의를 찾을 수 없습니다.");
-
-
 
     private final HttpStatus status;
     private final String msg;
-
 }

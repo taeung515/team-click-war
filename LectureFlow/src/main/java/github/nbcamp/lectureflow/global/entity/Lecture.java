@@ -1,24 +1,23 @@
 package github.nbcamp.lectureflow.global.entity;
 
-
 import github.nbcamp.lectureflow.global.enums.Day;
 import github.nbcamp.lectureflow.global.enums.Department;
 import github.nbcamp.lectureflow.global.enums.MajorOrGeneral;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalTime;
 
 @Entity
 @Getter
 @NoArgsConstructor
-@Table(name = "Lecture")
+@Table(name = "lectures")
 public class Lecture extends BaseEntity {
 
     // 기본키값 자동 생성 및 증가 시키도록 했으나 만약 따로 지정하고자 한다면 수정할 예정입니다.
     // @Id
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     //전공/교양
@@ -36,8 +35,8 @@ public class Lecture extends BaseEntity {
     private int gradeLevel;
 
     //원어 강의 여부
-    @Column(name = "is_foreign", nullable = false)
-    private boolean isForeign;
+    @Column(name = "is_foreign_language", nullable = false)
+    private boolean isForeignLanguage;
 
     //강의명
     @Column(name = "lecture_name", nullable = false)
@@ -64,9 +63,9 @@ public class Lecture extends BaseEntity {
     @Column(name = "end_time", nullable = false)
     private LocalTime endTime;
 
-    //강의실
+    //강의실: int로 바꿀까요
     @Column(nullable = false)
-    private String classroom;
+    private int classroom;
 
     //제한 인원
     @Column(name = "max_student", nullable = false)
@@ -75,12 +74,12 @@ public class Lecture extends BaseEntity {
     @Column(name = "click_count")
     private int clickCount;
 
-    public static Lecture of(MajorOrGeneral majorOrGeneral, Department department, int gradeLevel, boolean isForeign, String lectureName, int grade, String professor, Day day, LocalTime startTime, LocalTime endTime, String classroom, int maxStudent) {
+    public static Lecture of(MajorOrGeneral majorOrGeneral, Department department, int gradeLevel, boolean isForeignLanguage, String lectureName, int grade, String professor, Day day, LocalTime startTime, LocalTime endTime, int classroom, int maxStudent) {
         Lecture lecture = new Lecture();
         lecture.majorOrGeneral = majorOrGeneral;
         lecture.department = department;
         lecture.gradeLevel = gradeLevel;
-        lecture.isForeign = isForeign;
+        lecture.isForeignLanguage = isForeignLanguage;
         lecture.lectureName = lectureName;
         lecture.grade = grade;
         lecture.professor = professor;

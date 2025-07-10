@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum Department {
     //여기부터 전공
-    COMPUTER_ENGINEERING,
+    COMPUTER_SCIENCE_ENGINEERING,
     PHILOSOPHY,
     CHEMISTRY,
     BIOMEDICAL_ENGINEERING,
