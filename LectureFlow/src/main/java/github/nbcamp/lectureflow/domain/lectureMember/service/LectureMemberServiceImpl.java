@@ -1,7 +1,8 @@
 package github.nbcamp.lectureflow.domain.lectureMember.service;
 
 import github.nbcamp.lectureflow.domain.auth.exception.AuthException;
-import github.nbcamp.lectureflow.domain.lecture.LectureRepository;
+import github.nbcamp.lectureflow.domain.lecture.exception.LectureException;
+import github.nbcamp.lectureflow.domain.lecture.repository.LectureRepository;
 import github.nbcamp.lectureflow.domain.lectureMember.dto.request.CreateLectureMemberRequest;
 import github.nbcamp.lectureflow.domain.lectureMember.dto.response.CreateLectureMemberResponse;
 import github.nbcamp.lectureflow.domain.lectureMember.exception.LectureMemberException;
@@ -33,8 +34,8 @@ public class LectureMemberServiceImpl implements LectureMemberService {
                 .orElseThrow(() -> new AuthException(ErrorCode.MEMBER_NOT_FOUND));
 
         //강의 조회
-        Lecture lecture = lectureRepository.findById(Long.valueOf(request.getLectureId()))
-                .orElseThrow(() -> new LectureMemberException(ErrorCode.LECTURE_NOT_FOUND));
+        Lecture lecture = lectureRepository.findById(request.getLectureId())
+                .orElseThrow(() -> new LectureException(ErrorCode.LECTURE_NOT_FOUND));
 
         //정원 초과 확인 로직
         boolean overCapacity = checkStudent(lecture.getMaxStudent(), lecture.getId());
