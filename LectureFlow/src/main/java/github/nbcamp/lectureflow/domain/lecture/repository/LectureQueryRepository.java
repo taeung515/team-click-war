@@ -1,13 +1,12 @@
-package github.nbcamp.lectureflow.domain.lecture.service;
+package github.nbcamp.lectureflow.domain.lecture.repository;
 
 import github.nbcamp.lectureflow.domain.lecture.dto.request.LectureSearchCondition;
 import github.nbcamp.lectureflow.domain.lecture.dto.response.LectureDetailResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface LectureQueryService {
+public interface LectureQueryRepository {
 
-    LectureDetailResponse getLecture(Long lectureId);
+    Page<LectureDetailResponse> findByCondition(Pageable pageable, LectureSearchCondition condition);
 
-    Page<LectureDetailResponse> getLectures(Pageable pageable, LectureSearchCondition condition);
 }
