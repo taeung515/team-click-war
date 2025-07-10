@@ -25,12 +25,10 @@ public enum ErrorCode {
     LECTURE_MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND,"수강 신청 내역에 없습니다."),
     LECTURE_MEMBER_UNAUTHORIZED(HttpStatus.UNAUTHORIZED,"삭제 권한이 없습니다."),
 
-    //lecture
+
+    // lecture
     LECTURE_NOT_FOUND(HttpStatus.NOT_FOUND, "강의를 찾을 수 없습니다.");
-
-
 
     private final HttpStatus status;
     private final String msg;
-
 }
