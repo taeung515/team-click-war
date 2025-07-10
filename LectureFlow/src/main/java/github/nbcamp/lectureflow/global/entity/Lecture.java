@@ -1,25 +1,23 @@
 package github.nbcamp.lectureflow.global.entity;
 
-
 import github.nbcamp.lectureflow.global.enums.Day;
 import github.nbcamp.lectureflow.global.enums.Department;
 import github.nbcamp.lectureflow.global.enums.MajorOrGeneral;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.Length;
-
 import java.time.LocalTime;
 
 @Entity
 @Getter
 @NoArgsConstructor
-@Table(name = "Lecture")
+@Table(name = "lectures")
 public class Lecture extends BaseEntity {
 
     // 기본키값 자동 생성 및 증가 시키도록 했으나 만약 따로 지정하고자 한다면 수정할 예정입니다.
     // @Id
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     //전공/교양
