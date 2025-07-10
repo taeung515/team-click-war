@@ -64,6 +64,25 @@ public class LectureMemberServiceImpl implements LectureMemberService {
         return new CreateLectureMemberResponse(lectureMember.getId(), memberId, lecture.getId());
     }
 
+    @Transactional
+    @Override
+    public void deleteLectureMember(Long id, Long memberId) {
+
+        LectureMember lectureMember = lectureMemberRepository.findById(id)
+                .orElseThrow(()-> new LectureMemberException(ErrorCode.LECTURE_MEMBER_NOT_FOUND));
+
+        //로그인한 사용자와 요청한 사용자의 id가 다르면 예외 발생
+        if(!lectureMember.getMember().getId().equals(memberId)){
+            throw new LectureMemberException(ErrorCode.LECTURE_MEMBER_UNAUTHORIZED);
+        }
+        //해당 수강신청 고유 id 삭제
+        lectureMemberRepository.delete(lectureMember);
+    }
+
+
+
+
+
     //수강 정원 초과 확인 메서드
     public boolean checkStudent(int maxStudent, Long lectureId) {
         return lectureMemberRepository.countByLectureId(lectureId) >= maxStudent;

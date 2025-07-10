@@ -6,4 +6,6 @@ import github.nbcamp.lectureflow.domain.lectureMember.dto.response.CreateLecture
 public interface LectureMemberService {
 
     CreateLectureMemberResponse createLectureMember(CreateLectureMemberRequest lectureId, Long memberId);
+    void deleteLectureMember(Long id, Long memberId);
+
 }
