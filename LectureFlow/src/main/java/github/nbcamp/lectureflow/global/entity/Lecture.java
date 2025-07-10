@@ -7,6 +7,7 @@ import github.nbcamp.lectureflow.global.enums.MajorOrGeneral;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.Length;
 
 import java.time.LocalTime;
 
@@ -36,8 +37,8 @@ public class Lecture extends BaseEntity {
     private int gradeLevel;
 
     //원어 강의 여부
-    @Column(name = "is_foreign", nullable = false)
-    private boolean isForeign;
+    @Column(name = "is_foreign_language", nullable = false)
+    private boolean isForeignLanguage;
 
     //강의명
     @Column(name = "lecture_name", nullable = false)
@@ -64,9 +65,9 @@ public class Lecture extends BaseEntity {
     @Column(name = "end_time", nullable = false)
     private LocalTime endTime;
 
-    //강의실
+    //강의실: int로 바꿀까요
     @Column(nullable = false)
-    private String classroom;
+    private int classroom;
 
     //제한 인원
     @Column(name = "max_student", nullable = false)
@@ -75,12 +76,12 @@ public class Lecture extends BaseEntity {
     @Column(name = "click_count")
     private int clickCount;
 
-    public static Lecture of(MajorOrGeneral majorOrGeneral, Department department, int gradeLevel, boolean isForeign, String lectureName, int grade, String professor, Day day, LocalTime startTime, LocalTime endTime, String classroom, int maxStudent) {
+    public static Lecture of(MajorOrGeneral majorOrGeneral, Department department, int gradeLevel, boolean isForeignLanguage, String lectureName, int grade, String professor, Day day, LocalTime startTime, LocalTime endTime, int classroom, int maxStudent) {
         Lecture lecture = new Lecture();
         lecture.majorOrGeneral = majorOrGeneral;
         lecture.department = department;
         lecture.gradeLevel = gradeLevel;
-        lecture.isForeign = isForeign;
+        lecture.isForeignLanguage = isForeignLanguage;
         lecture.lectureName = lectureName;
         lecture.grade = grade;
         lecture.professor = professor;
