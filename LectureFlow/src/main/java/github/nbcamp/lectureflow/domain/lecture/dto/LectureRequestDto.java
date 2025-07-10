@@ -1,7 +1,5 @@
 package github.nbcamp.lectureflow.domain.lecture.dto;
 
-import github.nbcamp.lectureflow.global.Response.LectureResponse;
-import github.nbcamp.lectureflow.global.entity.Lecture;
 import github.nbcamp.lectureflow.global.enums.Day;
 import github.nbcamp.lectureflow.global.enums.Department;
 import github.nbcamp.lectureflow.global.enums.MajorOrGeneral;

@@ -1,4 +1,4 @@
-package github.nbcamp.lectureflow.global.Response;
+package github.nbcamp.lectureflow.domain.response;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
