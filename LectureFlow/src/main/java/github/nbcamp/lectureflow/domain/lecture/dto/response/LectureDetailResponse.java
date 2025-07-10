@@ -1,17 +1,16 @@
 package github.nbcamp.lectureflow.domain.lecture.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.querydsl.core.annotations.QueryProjection;
 import github.nbcamp.lectureflow.global.entity.Lecture;
 import github.nbcamp.lectureflow.global.enums.Day;
 import github.nbcamp.lectureflow.global.enums.Department;
 import github.nbcamp.lectureflow.global.enums.MajorOrGeneral;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalTime;
 
 @Getter
-@AllArgsConstructor
 public class LectureDetailResponse {
 
     private final Long lectureId;
@@ -27,8 +26,25 @@ public class LectureDetailResponse {
     private final LocalTime startTime;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private final LocalTime endTime;
-    private final String classroom;
+    private final int classroom;
     private final int maxStudent;
+
+    @QueryProjection
+    public LectureDetailResponse(Long lectureId, MajorOrGeneral majorOrGeneral, Department department, int gradeLevel, boolean isForeignLanguage, String lectureName, int grade, String professor, Day day, LocalTime startTime, LocalTime endTime, int classroom, int maxStudent) {
+        this.lectureId = lectureId;
+        this.majorOrGeneral = majorOrGeneral;
+        this.department = department;
+        this.gradeLevel = gradeLevel;
+        this.isForeignLanguage = isForeignLanguage;
+        this.lectureName = lectureName;
+        this.grade = grade;
+        this.professor = professor;
+        this.day = day;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.classroom = classroom;
+        this.maxStudent = maxStudent;
+    }
 
     public static LectureDetailResponse of(Lecture lecture) {
         return new LectureDetailResponse(
