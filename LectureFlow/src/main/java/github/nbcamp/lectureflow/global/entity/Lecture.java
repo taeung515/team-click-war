@@ -1,13 +1,11 @@
 package github.nbcamp.lectureflow.global.entity;
 
-
 import github.nbcamp.lectureflow.global.enums.Day;
 import github.nbcamp.lectureflow.global.enums.Department;
 import github.nbcamp.lectureflow.global.enums.MajorOrGeneral;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalTime;
 
 @Entity

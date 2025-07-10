@@ -19,7 +19,7 @@ public class LectureController {
 
     //@Secured("ROLE_ADMIN")
     //테스트 하려고 주석처리 했습니다.
-    @PostMapping("auth/lectures")
+    @PostMapping("admin/lectures")
     public ResponseEntity<ApiResponse<Long>> createLectures(@RequestParam(value = "multipartFile") MultipartFile multipartFile) throws IOException {
         lectureService.createLecture(multipartFile);
 
