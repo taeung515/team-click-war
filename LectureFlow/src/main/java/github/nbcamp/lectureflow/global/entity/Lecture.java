@@ -6,6 +6,7 @@ import github.nbcamp.lectureflow.global.enums.MajorOrGeneral;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import java.time.LocalTime;
 
 @Entity
@@ -71,9 +72,6 @@ public class Lecture extends BaseEntity {
     @Column(name = "max_student", nullable = false)
     private int maxStudent;
 
-    @Column(name = "click_count")
-    private int clickCount;
-
     public static Lecture of(MajorOrGeneral majorOrGeneral, Department department, int gradeLevel, boolean isForeignLanguage, String lectureName, int grade, String professor, Day day, LocalTime startTime, LocalTime endTime, int classroom, int maxStudent) {
         Lecture lecture = new Lecture();
         lecture.majorOrGeneral = majorOrGeneral;
@@ -88,7 +86,6 @@ public class Lecture extends BaseEntity {
         lecture.endTime = endTime;
         lecture.classroom = classroom;
         lecture.maxStudent = maxStudent;
-        lecture.clickCount = 0;
 
         return lecture;
     }

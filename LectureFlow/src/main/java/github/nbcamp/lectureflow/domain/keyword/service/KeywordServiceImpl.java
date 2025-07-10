@@ -1,5 +1,6 @@
 package github.nbcamp.lectureflow.domain.keyword.service;
 
+import github.nbcamp.lectureflow.domain.keyword.dto.TopTenResponse;
 import github.nbcamp.lectureflow.domain.keyword.repository.KeywordRepository;
 import github.nbcamp.lectureflow.global.entity.Keyword;
 import lombok.RequiredArgsConstructor;
@@ -20,5 +21,11 @@ public class KeywordServiceImpl implements KeywordService {
         if (StringUtils.hasText(keyword)) {
             keywordRepository.save(Keyword.of(keyword));
         }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public TopTenResponse getPopularKeywords() {
+        return TopTenResponse.of(keywordRepository.findPopularKeywords());
     }
 }
