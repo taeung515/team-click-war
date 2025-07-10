@@ -50,11 +50,11 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private void setSecurityContextHolder(String jwt) {
 
-        Long userId = jwtUtil.extractUserId(jwt);
-        String userRole = jwtUtil.extractRoles(jwt);
+        Long memberId = jwtUtil.extractMemberId(jwt);
+        String role = jwtUtil.extractRoles(jwt);
 
         SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
-                userId, "", List.of(new SimpleGrantedAuthority("ROLE_" + userRole))
+                memberId, "", List.of(new SimpleGrantedAuthority("ROLE_" + role))
         ));
     }
 }
