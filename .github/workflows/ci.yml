@@ -28,8 +28,8 @@ jobs:
 
       # Gradle 빌드 수행
       - name: Build with Gradle
-        run: ./gradlew build --no-daemon
+        run: ./gradlew build
 
       # 단위 테스트 실행
       - name: 테스트 실행
-        run: ./gradlew test --no-daemon
+        run: ./gradlew test
