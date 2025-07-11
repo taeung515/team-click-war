@@ -7,12 +7,12 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class CreateLectureMemberResponse {
-    private final Long id;
+    private final Long lectureMemberId;
     private final Long memberId;
     private final Long lectureId;
 
-    public static CreateLectureMemberResponse of(Long id, Long memberId, Long lectureId) {
-        return new CreateLectureMemberResponse(id, memberId, lectureId);
+    public static CreateLectureMemberResponse of(Long lectureMemberId, Long memberId, Long lectureId) {
+        return new CreateLectureMemberResponse(lectureMemberId, memberId, lectureId);
     }
 
 }
