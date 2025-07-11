@@ -21,4 +21,10 @@ public class KeywordController {
         TopTenResponse response = keywordService.getPopularKeywords();
         return ResponseEntity.ok(ApiResponse.success("탑 10 인기 검색어 조회 성공", response));
     }
+
+    @GetMapping("/v2/popular")
+    public ResponseEntity<ApiResponse<TopTenResponse>> getPopularKeywordsV2() {
+        TopTenResponse response = keywordService.getPopularKeywordsV2();
+        return ResponseEntity.ok(ApiResponse.success("탑 10 인기 검색어 조회 성공", response));
+    }
 }
