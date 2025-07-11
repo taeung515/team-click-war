@@ -6,4 +6,6 @@ public interface KeywordService {
     void saveKeyword(String keyword);
 
     TopTenResponse getPopularKeywords();
+
+    TopTenResponse getPopularKeywordsV2();
 }
