@@ -2,8 +2,10 @@ package github.nbcamp.lectureflow.domain.lecture.service;
 
 import github.nbcamp.lectureflow.domain.lecture.dto.request.LectureUpdateRequestDto;
 import github.nbcamp.lectureflow.domain.lecture.dto.request.LectureUploadRequestDto;
+import github.nbcamp.lectureflow.domain.lecture.exception.LectureException;
 import github.nbcamp.lectureflow.domain.lecture.repository.LectureRepository;
 import github.nbcamp.lectureflow.global.entity.Lecture;
+import github.nbcamp.lectureflow.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,7 +43,7 @@ public class LectureService {
         lectureRepository.saveAll(lectureList);
     }
 
-    public void createLecture(LectureUploadRequestDto lectureUploadRequestDto){
+    public void createLecture(LectureUploadRequestDto lectureUploadRequestDto) {
         Lecture lecture = Lecture.of(lectureUploadRequestDto);
         lectureRepository.save(lecture);
 
@@ -49,12 +51,10 @@ public class LectureService {
 
     public void updateLecture(LectureUpdateRequestDto lectureUpdateRequestDto, Long lectureId) {
         Optional<Lecture> optionalLecture = lectureRepository.findById(lectureId);
-        /*
-        머지 하시면 주석 삭제 예정
-        if(optionalLecture.isEmpty())
-            throw new LectureException(Errorcode.LECUTRE_NOT_FOUND);
-         */
-        // 예외처리는 후에 추가할 예정
+
+        // 값 존재 하지 않는 예외
+        if (optionalLecture.isEmpty())
+            throw new LectureException(ErrorCode.LECTURE_NOT_FOUND);
 
         Lecture lecture = optionalLecture.get();
         dtoNullIgnoreMapper.updateLecture(lectureUpdateRequestDto, lecture);
@@ -63,7 +63,10 @@ public class LectureService {
     }
 
     public void deleteLecture(Long lectureId) {
-        // 예외처리는 후에 추가할 예정
+        //해당 데이터 존재 여부 확인
+        if (!lectureRepository.existsById(lectureId))
+            throw new LectureException(ErrorCode.LECTURE_NOT_FOUND);
+
         lectureRepository.deleteById(lectureId);
     }
 }
