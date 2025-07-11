@@ -1,6 +1,6 @@
 package github.nbcamp.lectureflow.global.entity;
 
-import github.nbcamp.lectureflow.domain.lecture.dto.LectureRequestDto;
+import github.nbcamp.lectureflow.domain.lecture.dto.request.LectureUploadRequestDto;
 import github.nbcamp.lectureflow.global.enums.Day;
 import github.nbcamp.lectureflow.global.enums.Department;
 import github.nbcamp.lectureflow.global.enums.MajorOrGeneral;
@@ -99,20 +99,20 @@ public class Lecture extends BaseEntity {
         return lecture;
     }
 
-    public static Lecture of(LectureRequestDto.UploadDto uploadDto) {
+    public static Lecture of(LectureUploadRequestDto lectureUploadRequestDto) {
         Lecture lecture = new Lecture();
-        lecture.majorOrGeneral = uploadDto.getMajorOrGeneral();
-        lecture.department = uploadDto.getDepartment();
-        lecture.gradeLevel = uploadDto.getGradeLevel();
-        lecture.isForeignLanguage = uploadDto.getIsForeignLanguage();
-        lecture.lectureName = uploadDto.getLectureName();
-        lecture.grade = uploadDto.getGrade();
-        lecture.professor = uploadDto.getProfessor();
-        lecture.day = uploadDto.getDay();
-        lecture.startTime = uploadDto.getStartTime();
-        lecture.endTime = uploadDto.getEndTime();
-        lecture.classroom = uploadDto.getClassroom();
-        lecture.maxStudent = uploadDto.getMaxStudent();
+        lecture.majorOrGeneral = lectureUploadRequestDto.getMajorOrGeneral();
+        lecture.department = lectureUploadRequestDto.getDepartment();
+        lecture.gradeLevel = lectureUploadRequestDto.getGradeLevel();
+        lecture.isForeignLanguage = lectureUploadRequestDto.getIsForeignLanguage();
+        lecture.lectureName = lectureUploadRequestDto.getLectureName();
+        lecture.grade = lectureUploadRequestDto.getGrade();
+        lecture.professor = lectureUploadRequestDto.getProfessor();
+        lecture.day = lectureUploadRequestDto.getDay();
+        lecture.startTime = lectureUploadRequestDto.getStartTime();
+        lecture.endTime = lectureUploadRequestDto.getEndTime();
+        lecture.classroom = lectureUploadRequestDto.getClassroom();
+        lecture.maxStudent = lectureUploadRequestDto.getMaxStudent();
         lecture.clickCount = 0;
 
         return lecture;

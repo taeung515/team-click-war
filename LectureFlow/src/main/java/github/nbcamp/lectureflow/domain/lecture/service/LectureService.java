@@ -1,6 +1,7 @@
 package github.nbcamp.lectureflow.domain.lecture.service;
 
-import github.nbcamp.lectureflow.domain.lecture.dto.LectureRequestDto;
+import github.nbcamp.lectureflow.domain.lecture.dto.request.LectureUpdateRequestDto;
+import github.nbcamp.lectureflow.domain.lecture.dto.request.LectureUploadRequestDto;
 import github.nbcamp.lectureflow.domain.lecture.repository.LectureRepository;
 import github.nbcamp.lectureflow.global.entity.Lecture;
 import lombok.RequiredArgsConstructor;
@@ -22,31 +23,31 @@ public class LectureService {
 
     public void createLectures(MultipartFile multipartFile) throws IOException {
         InputStream inputStream = multipartFile.getInputStream();
-        List<LectureRequestDto.UploadDto> lectureRequestDtoList = ExcelUpload.exelToLecture(inputStream);
-        List<Lecture> lectureList = lectureRequestDtoList.stream().map(uploadDto -> Lecture.of(
-                uploadDto.getMajorOrGeneral(),
-                uploadDto.getDepartment(),
-                uploadDto.getGradeLevel(),
-                uploadDto.getIsForeignLanguage(),
-                uploadDto.getLectureName(),
-                uploadDto.getGrade(),
-                uploadDto.getProfessor(),
-                uploadDto.getDay(),
-                uploadDto.getStartTime(),
-                uploadDto.getEndTime(),
-                uploadDto.getClassroom(),
-                uploadDto.getMaxStudent()
+        List<LectureUploadRequestDto> lectureRequestDtoList = ExcelUpload.exelToLecture(inputStream);
+        List<Lecture> lectureList = lectureRequestDtoList.stream().map(lectureUploadRequestDto -> Lecture.of(
+                lectureUploadRequestDto.getMajorOrGeneral(),
+                lectureUploadRequestDto.getDepartment(),
+                lectureUploadRequestDto.getGradeLevel(),
+                lectureUploadRequestDto.getIsForeignLanguage(),
+                lectureUploadRequestDto.getLectureName(),
+                lectureUploadRequestDto.getGrade(),
+                lectureUploadRequestDto.getProfessor(),
+                lectureUploadRequestDto.getDay(),
+                lectureUploadRequestDto.getStartTime(),
+                lectureUploadRequestDto.getEndTime(),
+                lectureUploadRequestDto.getClassroom(),
+                lectureUploadRequestDto.getMaxStudent()
         )).toList();
         lectureRepository.saveAll(lectureList);
     }
 
-    public void createLecture(LectureRequestDto.UploadDto uploadDto){
-        Lecture lecture = Lecture.of(uploadDto);
+    public void createLecture(LectureUploadRequestDto lectureUploadRequestDto){
+        Lecture lecture = Lecture.of(lectureUploadRequestDto);
         lectureRepository.save(lecture);
 
     }
 
-    public void updateLecture(LectureRequestDto.UpdateDto updateDto, Long lectureId) {
+    public void updateLecture(LectureUpdateRequestDto lectureUpdateRequestDto, Long lectureId) {
         Optional<Lecture> optionalLecture = lectureRepository.findById(lectureId);
         /*
         머지 하시면 주석 삭제 예정
@@ -56,7 +57,7 @@ public class LectureService {
         // 예외처리는 후에 추가할 예정
 
         Lecture lecture = optionalLecture.get();
-        dtoNullIgnoreMapper.updateLecture(updateDto, lecture);
+        dtoNullIgnoreMapper.updateLecture(lectureUpdateRequestDto, lecture);
 
 
     }

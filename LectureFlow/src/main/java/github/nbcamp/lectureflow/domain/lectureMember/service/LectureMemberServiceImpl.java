@@ -1,7 +1,7 @@
 package github.nbcamp.lectureflow.domain.lectureMember.service;
 
 import github.nbcamp.lectureflow.domain.auth.exception.AuthException;
-import github.nbcamp.lectureflow.domain.lecture.LectureRepository;
+import github.nbcamp.lectureflow.domain.lecture.repository.LectureRepository;
 import github.nbcamp.lectureflow.domain.lectureMember.dto.request.CreateLectureMemberRequest;
 import github.nbcamp.lectureflow.domain.lectureMember.dto.response.CreateLectureMemberResponse;
 import github.nbcamp.lectureflow.domain.lectureMember.exception.LectureMemberException;

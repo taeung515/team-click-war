@@ -1,6 +1,7 @@
 package github.nbcamp.lectureflow.domain.lecture.controller;
 
-import github.nbcamp.lectureflow.domain.lecture.dto.LectureRequestDto;
+import github.nbcamp.lectureflow.domain.lecture.dto.request.LectureUpdateRequestDto;
+import github.nbcamp.lectureflow.domain.lecture.dto.request.LectureUploadRequestDto;
 import github.nbcamp.lectureflow.domain.lecture.service.LectureService;
 import github.nbcamp.lectureflow.domain.response.LectureResponse;
 import github.nbcamp.lectureflow.global.dto.ApiResponse;
@@ -27,15 +28,15 @@ public class LectureController {
     }
 
     @PostMapping("/lectures")
-    public ResponseEntity<ApiResponse<Void>> createLecture(@RequestBody LectureRequestDto.UploadDto uploadDto) {
-        lectureService.createLecture(uploadDto);
+    public ResponseEntity<ApiResponse<Void>> createLecture(@RequestBody LectureUploadRequestDto lectureUploadRequestDto) {
+        lectureService.createLecture(lectureUploadRequestDto);
 
         return ResponseEntity.ok(ApiResponse.success(LectureResponse.LECTURE_UPLOAD_SUCCESS.getMessage(), null));
     }
 
     @PatchMapping("/lectures/{lectureId}")
-    public ResponseEntity<ApiResponse<Void>> updateLectures(@RequestBody LectureRequestDto.UpdateDto updateDto, @PathVariable Long lectureId) {
-        lectureService.updateLecture(updateDto, lectureId);
+    public ResponseEntity<ApiResponse<Void>> updateLectures(@RequestBody LectureUpdateRequestDto lectureUpdateRequestDto, @PathVariable Long lectureId) {
+        lectureService.updateLecture(lectureUpdateRequestDto, lectureId);
 
         return ResponseEntity.ok(ApiResponse.success(LectureResponse.LECTURE_UPDATE_SUCCESS.getMessage(), null));
     }
