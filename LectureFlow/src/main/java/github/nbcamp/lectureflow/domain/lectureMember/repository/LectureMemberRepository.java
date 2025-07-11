@@ -9,5 +9,5 @@ public interface LectureMemberRepository extends JpaRepository<LectureMember, Lo
 
     List<LectureMember> findAllByMemberIdAndLectureId(Long memberId, Long lectureId);
 
-    Long countByLectureId(Long lectureMemberId);
+    Long countByLectureId(Long lectureId);
 }
