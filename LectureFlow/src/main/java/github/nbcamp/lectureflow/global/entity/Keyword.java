@@ -18,8 +18,8 @@ public class Keyword {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(updatable = false)
-    private String keyword;
+    @Column(nullable = false, updatable = false)
+    private String searchKeyword;
 
     @CreatedDate
     @Column(updatable = false)
@@ -27,7 +27,7 @@ public class Keyword {
 
     public static Keyword of(String keyword) {
         Keyword keywordKeyword = new Keyword();
-        keywordKeyword.keyword = keyword;
+        keywordKeyword.searchKeyword = keyword;
         return keywordKeyword;
     }
 

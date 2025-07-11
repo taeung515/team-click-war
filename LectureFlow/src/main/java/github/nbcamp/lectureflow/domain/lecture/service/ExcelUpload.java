@@ -1,6 +1,6 @@
 package github.nbcamp.lectureflow.domain.lecture.service;
 
-import github.nbcamp.lectureflow.domain.lecture.dto.LectureRequestDto;
+import github.nbcamp.lectureflow.domain.lecture.dto.request.LectureUploadRequestDto;
 import github.nbcamp.lectureflow.global.enums.Day;
 import github.nbcamp.lectureflow.global.enums.Department;
 import github.nbcamp.lectureflow.global.enums.MajorOrGeneral;
@@ -17,7 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ExcelUpload {
-    public static List<LectureRequestDto> exelToLecture(InputStream inputStream) {
+    public static List<LectureUploadRequestDto> exelToLecture(InputStream inputStream) {
 
         try {
             // 엑셀 파일 읽어서 Workbook 객체로 만듦
@@ -28,7 +28,7 @@ public class ExcelUpload {
             Iterator<Row> rowIterator = sheet.iterator();
             int rowNumber = 0;  // 0은 헤더이기 때문에 스킵
             //결과 담을 리스트
-            List<LectureRequestDto> lectureList = new ArrayList<>();
+            List<LectureUploadRequestDto> lectureList = new ArrayList<>();
 
             //다음 행이 존재하지 않으면 멈춤
             while (rowIterator.hasNext()) {
@@ -42,7 +42,7 @@ public class ExcelUpload {
                 Iterator<Cell> cellIterator = nowRow.iterator();
                 int cellIndex = 0;
                 //빌더
-                LectureRequestDto.LectureRequestDtoBuilder lectureRequestDtoBuilder = LectureRequestDto.builder();
+                LectureUploadRequestDto.LectureUploadRequestDtoBuilder lectureRequestDtoBuilder = LectureUploadRequestDto.builder();
 
                 // 다음 셀이 존재하지 않으면 멈춤
                 while (cellIterator.hasNext()) {
