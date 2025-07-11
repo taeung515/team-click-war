@@ -62,14 +62,14 @@ public class LectureMemberServiceImpl implements LectureMemberService {
         //수강 신청
         lectureMemberRepository.save(lectureMember);
 
-        return new CreateLectureMemberResponse(lectureMember.getId(), memberId, lecture.getId());
+        return new CreateLectureMemberResponse(lectureMember.getLectureMemberId(), memberId, lecture.getId());
     }
 
     @Transactional
     @Override
-    public void deleteLectureMember(Long id, Long memberId) {
+    public void deleteLectureMember(Long LectureMemberId, Long memberId) {
 
-        LectureMember lectureMember = lectureMemberRepository.findById(id)
+        LectureMember lectureMember = lectureMemberRepository.findById(LectureMemberId)
                 .orElseThrow(()-> new LectureMemberException(ErrorCode.LECTURE_MEMBER_NOT_FOUND));
 
         //로그인한 사용자와 요청한 사용자의 id가 다르면 예외 발생
