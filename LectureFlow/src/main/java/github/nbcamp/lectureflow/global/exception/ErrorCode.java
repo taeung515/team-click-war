@@ -22,6 +22,8 @@ public enum ErrorCode {
     // lectureMember(수강신청)
     OVER_CAPACITY(HttpStatus.CONFLICT, "수강 정원이 마감되었습니다."),
     DUPLICATE_ENROLL(HttpStatus.BAD_REQUEST, "이미 수강 또는 재수강 완료한 강의입니다."),
+    LECTURE_MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND,"수강 신청 내역에 없습니다."),
+    LECTURE_MEMBER_UNAUTHORIZED(HttpStatus.UNAUTHORIZED,"삭제 권한이 없습니다."),
 
 
     // lecture
