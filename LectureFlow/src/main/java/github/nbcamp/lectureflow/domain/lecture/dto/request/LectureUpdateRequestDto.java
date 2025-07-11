@@ -1,28 +1,25 @@
-package github.nbcamp.lectureflow.domain.lecture.dto;
+package github.nbcamp.lectureflow.domain.lecture.dto.request;
 
 import github.nbcamp.lectureflow.global.enums.Day;
 import github.nbcamp.lectureflow.global.enums.Department;
 import github.nbcamp.lectureflow.global.enums.MajorOrGeneral;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import java.time.LocalTime;
 
-@Builder
-@AllArgsConstructor
 @Getter
-public class LectureRequestDto {
+@AllArgsConstructor
+public class LectureUpdateRequestDto {
     private MajorOrGeneral majorOrGeneral;
     private Department department;
-    private int gradeLevel;
-    private boolean isForeignLanguage;
+    private Integer gradeLevel;
+    private Boolean isForeignLanguage;
     private String lectureName;
-    private int grade;
+    private Integer grade;
     private String professor;
     private Day day;
     private LocalTime startTime;
     private LocalTime endTime;
-    private int classroom;
-    private int maxStudent;
-
+    private Integer classroom;
+    private Integer maxStudent;
 }
