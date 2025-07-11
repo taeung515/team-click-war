@@ -25,9 +25,9 @@ public class LectureMemberController {
         return ResponseEntity.ok(ApiResponse.success("수강신청 완료", response));
     }
 
-    @DeleteMapping("/{lectureMemberid}")
-    public ResponseEntity<ApiResponse<Void>> DeleteLectureMember(@PathVariable Long lectureMemberid, @AuthenticationPrincipal Long memberId) {
-        lectureMemberService.deleteLectureMember(lectureMemberid,memberId);
+    @DeleteMapping("/{lectureMemberId}")
+    public ResponseEntity<ApiResponse<Void>> deleteLectureMember(@PathVariable Long lectureMemberId, @AuthenticationPrincipal Long memberId) {
+        lectureMemberService.deleteLectureMember(lectureMemberId,memberId);
         return ResponseEntity.ok(ApiResponse.success("수강취소 완료",null));
     }
 }
