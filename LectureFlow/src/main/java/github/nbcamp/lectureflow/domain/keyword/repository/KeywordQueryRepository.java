@@ -5,4 +5,6 @@ import java.util.List;
 public interface KeywordQueryRepository {
 
     List<String> findPopularKeywords();
+
+    long deleteOldKeywords();
 }

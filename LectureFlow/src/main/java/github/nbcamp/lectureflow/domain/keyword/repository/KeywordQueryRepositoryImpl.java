@@ -4,9 +4,10 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
-import static github.nbcamp.lectureflow.global.entity.QKeyword.keyword1;
+import static github.nbcamp.lectureflow.global.entity.QKeyword.keyword;
 
 
 @Repository
@@ -18,11 +19,21 @@ public class KeywordQueryRepositoryImpl implements KeywordQueryRepository {
     @Override
     public List<String> findPopularKeywords() {
         return query
-                .select(keyword1.keyword)
-                .from(keyword1)
-                .groupBy(keyword1.keyword)
-                .orderBy(keyword1.keyword.count().desc())
+                .select(keyword.searchKeyword)
+                .from(keyword)
+                .groupBy(keyword.searchKeyword)
+                .orderBy(keyword.searchKeyword.count().desc())
                 .limit(10)
                 .fetch();
     }
+
+    @Override
+    public long deleteOldKeywords() {
+        LocalDateTime sevenDaysAgo = LocalDateTime.now().minusDays(7);
+        return query
+                .delete(keyword)
+                .where(keyword.createdAt.lt(sevenDaysAgo))
+                .execute();
+    }
 }
+
