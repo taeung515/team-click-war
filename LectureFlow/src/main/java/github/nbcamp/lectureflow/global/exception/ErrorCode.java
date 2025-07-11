@@ -23,9 +23,15 @@ public enum ErrorCode {
     OVER_CAPACITY(HttpStatus.CONFLICT, "수강 정원이 마감되었습니다."),
     DUPLICATE_ENROLL(HttpStatus.BAD_REQUEST, "이미 수강 또는 재수강 완료한 강의입니다."),
 
-
     // lecture
-    LECTURE_NOT_FOUND(HttpStatus.NOT_FOUND, "강의를 찾을 수 없습니다.");
+    LECTURE_NOT_FOUND(HttpStatus.NOT_FOUND, "강의를 찾을 수 없습니다."),
+    CANT_UPLOAD_LECTURE(HttpStatus.BAD_REQUEST, "파일을 업로드할 수 없습니다."),
+    WRONG_REQUEST_VALUE(HttpStatus.BAD_REQUEST, "파일의 셀 값이 올바르지 않습니다."),
+    WRONG_REQUEST_TYPE(HttpStatus.BAD_REQUEST, "파일의 셀 값의 형식이 올바르지 않습니다."),
+    TOO_BIG_FILE(HttpStatus.BAD_REQUEST, "파일의 크기가 너무 큽니다."),
+    WRONG_TYPE_FILE(HttpStatus.BAD_REQUEST, "잘못된 형식의 파일입니다."),
+    WRONG_TIME_FORM(HttpStatus.BAD_REQUEST, "잘못된 형태의 시간 값입니다."),
+    NULL_CELL(HttpStatus.BAD_REQUEST, "빈 셀 값이 존재합니다.");
 
     private final HttpStatus status;
     private final String msg;

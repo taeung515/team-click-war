@@ -8,20 +8,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
-
 import java.time.LocalTime;
 
-@Slf4j
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 @Table(name = "lectures")
 public class Lecture extends BaseEntity {
 
-    // 기본키값 자동 생성 및 증가 시키도록 했으나 만약 따로 지정하고자 한다면 수정할 예정입니다.
-    // @Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -48,7 +42,7 @@ public class Lecture extends BaseEntity {
     @Column(name = "lecture_name", nullable = false)
     private String lectureName;
 
-    //학년
+    //학점
     @Column(nullable = false)
     private Integer grade;
 
@@ -77,9 +71,6 @@ public class Lecture extends BaseEntity {
     @Column(name = "max_student", nullable = false)
     private Integer maxStudent;
 
-    @Column(name = "click_count")
-    private Integer clickCount;
-
     public static Lecture of(MajorOrGeneral majorOrGeneral, Department department, Integer gradeLevel, Boolean isForeignLanguage, String lectureName, Integer grade, String professor, Day day, LocalTime startTime, LocalTime endTime, Integer classroom, Integer maxStudent) {
         Lecture lecture = new Lecture();
         lecture.majorOrGeneral = majorOrGeneral;
@@ -94,7 +85,6 @@ public class Lecture extends BaseEntity {
         lecture.endTime = endTime;
         lecture.classroom = classroom;
         lecture.maxStudent = maxStudent;
-        lecture.clickCount = 0;
 
         return lecture;
     }
@@ -113,11 +103,7 @@ public class Lecture extends BaseEntity {
         lecture.endTime = lectureUploadRequestDto.getEndTime();
         lecture.classroom = lectureUploadRequestDto.getClassroom();
         lecture.maxStudent = lectureUploadRequestDto.getMaxStudent();
-        lecture.clickCount = 0;
 
         return lecture;
     }
-
-    //필요한 메서드는 그때그때 추가하겠습니다. 필드가 너무 많아서...
-
 }
