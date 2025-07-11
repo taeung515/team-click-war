@@ -7,7 +7,6 @@ import github.nbcamp.lectureflow.global.enums.MajorOrGeneral;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import java.time.LocalTime;
 
 @Entity
@@ -63,7 +62,7 @@ public class Lecture extends BaseEntity {
     @Column(name = "end_time", nullable = false)
     private LocalTime endTime;
 
-    //강의실: int로 바꿀까요
+    //강의실
     @Column(nullable = false)
     private Integer classroom;
 

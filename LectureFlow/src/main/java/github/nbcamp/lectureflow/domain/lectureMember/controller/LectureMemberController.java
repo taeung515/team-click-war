@@ -9,10 +9,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,9 +18,16 @@ public class LectureMemberController {
 
     private final LectureMemberService lectureMemberService;
 
+
     @PostMapping()
     public ResponseEntity<ApiResponse<CreateLectureMemberResponse>> createLectureMember(@Valid @RequestBody CreateLectureMemberRequest request, @AuthenticationPrincipal Long memberId) {
         CreateLectureMemberResponse response = lectureMemberService.createLectureMember(request, memberId);
         return ResponseEntity.ok(ApiResponse.success("수강신청 완료", response));
+    }
+
+    @DeleteMapping("/{lectureMemberId}")
+    public ResponseEntity<ApiResponse<Void>> deleteLectureMember(@PathVariable Long lectureMemberId, @AuthenticationPrincipal Long memberId) {
+        lectureMemberService.deleteLectureMember(lectureMemberId,memberId);
+        return ResponseEntity.ok(ApiResponse.success("수강취소 완료",null));
     }
 }

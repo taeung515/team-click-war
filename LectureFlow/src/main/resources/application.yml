@@ -2,7 +2,7 @@ spring:
   profiles:
     active: dev
 app:
-  jwt-secret: ${SECRET_KEY}
+  jwt-secret: bXktbGVjdHVyZWZsb3ctMjAyNS1zZWN1cml0eS1rZXktc3ByaW5nLXN0cm9uZw==
   jwt-expiration-milliseconds: 86400000
 
 ---
@@ -12,9 +12,9 @@ spring:
       on-profile: dev
 
   datasource:
-    url: jdbc:mysql://localhost:3306/${DB_SCHEMA}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:mysql://localhost:3306/lectureflow
+    username: root
+    password: dbsghwns1!
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:

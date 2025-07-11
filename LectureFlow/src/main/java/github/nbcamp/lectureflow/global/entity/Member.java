@@ -30,7 +30,7 @@ public class Member extends BaseEntity {
     @Column(nullable = false)
     private String name;
 
-    //전화번호 (선택)
+    //전화번호
     private String phone;
 
     //권한: ADMIN / STUDENT
@@ -39,11 +39,11 @@ public class Member extends BaseEntity {
     private Role role;
 
     //정적 팩토리 메서드
-    public static Member of(String email, String password, String name, String phone, Role role) {
+    public static Member of(String email, String password, String nickname, String phone, Role role) {
         Member member = new Member();
         member.email = email;
         member.password = password;
-        member.name = name;
+        member.name = nickname;
         member.phone = phone;
         member.role = role;
         return member;
@@ -55,8 +55,8 @@ public class Member extends BaseEntity {
     }
 
     //이름 및 전화번호 수정
-    public void updateInfo(String name, String phone) {
-        this.name = name;
+    public void updateInfo(String nickname, String phone) {
+        this.name = nickname;
         this.phone = phone;
     }
 }
