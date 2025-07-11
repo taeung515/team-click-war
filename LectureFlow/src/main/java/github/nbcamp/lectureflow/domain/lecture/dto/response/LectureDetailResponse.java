@@ -52,7 +52,7 @@ public class LectureDetailResponse {
                 lecture.getMajorOrGeneral(),
                 lecture.getDepartment(),
                 lecture.getGradeLevel(),
-                lecture.isForeignLanguage(),
+                lecture.getIsForeignLanguage(),
                 lecture.getLectureName(),
                 lecture.getGrade(),
                 lecture.getProfessor(),

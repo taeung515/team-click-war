@@ -76,7 +76,7 @@ public class LectureQueryRepositoryImpl implements LectureQueryRepository {
             );
         }
 
-        // 전공 / 교양
+        // 3. 전공 / 교양
         if (condition.getMajorOrGeneral() != null) {
             builder.and(lecture.majorOrGeneral.eq(condition.getMajorOrGeneral()));
         }

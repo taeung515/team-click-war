@@ -1,7 +1,8 @@
 package github.nbcamp.lectureflow.domain.lectureMember.service;
 
 import github.nbcamp.lectureflow.domain.auth.exception.AuthException;
-import github.nbcamp.lectureflow.domain.lecture.LectureRepository;
+import github.nbcamp.lectureflow.domain.lecture.exception.LectureException;
+import github.nbcamp.lectureflow.domain.lecture.repository.LectureRepository;
 import github.nbcamp.lectureflow.domain.lectureMember.dto.request.CreateLectureMemberRequest;
 import github.nbcamp.lectureflow.domain.lectureMember.dto.response.CreateLectureMemberResponse;
 import github.nbcamp.lectureflow.domain.lectureMember.exception.LectureMemberException;
@@ -33,8 +34,8 @@ public class LectureMemberServiceImpl implements LectureMemberService {
                 .orElseThrow(() -> new AuthException(ErrorCode.MEMBER_NOT_FOUND));
 
         //강의 조회
-        Lecture lecture = lectureRepository.findById(Long.valueOf(request.getLectureId()))
-                .orElseThrow(() -> new LectureMemberException(ErrorCode.LECTURE_NOT_FOUND));
+        Lecture lecture = lectureRepository.findById(request.getLectureId())
+                .orElseThrow(() -> new LectureException(ErrorCode.LECTURE_NOT_FOUND));
 
         //정원 초과 확인 로직
         boolean overCapacity = checkStudent(lecture.getMaxStudent(), lecture.getId());
@@ -61,8 +62,27 @@ public class LectureMemberServiceImpl implements LectureMemberService {
         //수강 신청
         lectureMemberRepository.save(lectureMember);
 
-        return new CreateLectureMemberResponse(lectureMember.getId(), memberId, lecture.getId());
+        return new CreateLectureMemberResponse(lectureMember.getLectureMemberId(), memberId, lecture.getId());
     }
+
+    @Transactional
+    @Override
+    public void deleteLectureMember(Long LectureMemberId, Long memberId) {
+
+        LectureMember lectureMember = lectureMemberRepository.findById(LectureMemberId)
+                .orElseThrow(()-> new LectureMemberException(ErrorCode.LECTURE_MEMBER_NOT_FOUND));
+
+        //로그인한 사용자와 요청한 사용자의 id가 다르면 예외 발생
+        if(!lectureMember.getMember().getId().equals(memberId)){
+            throw new LectureMemberException(ErrorCode.LECTURE_MEMBER_UNAUTHORIZED);
+        }
+        //해당 수강신청 고유 id 삭제
+        lectureMemberRepository.delete(lectureMember);
+    }
+
+
+
+
 
     //수강 정원 초과 확인 메서드
     public boolean checkStudent(int maxStudent, Long lectureId) {
