@@ -1,5 +1,6 @@
 package github.nbcamp.lectureflow.domain.lectureMember.service;
 
+import github.nbcamp.lectureflow.domain.lectureMember.dto.response.LectureEnrollCountResponse;
 import github.nbcamp.lectureflow.domain.lectureMember.dto.response.LectureMemberListResponse;
 import github.nbcamp.lectureflow.domain.lectureMember.repository.LectureMemberQueryRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,4 +19,11 @@ public class LectureMemberQueryServiceImpl implements LectureMemberQueryService{
     public List<LectureMemberListResponse> getLectureMember(Long memberId) {
         return lectureMemberQueryRepository.getLectureMember(memberId);
     }
+
+    @Override
+    public LectureEnrollCountResponse getLectureEnrollCount(Long lectureId) {
+        return lectureMemberQueryRepository.getLectureEnrollCount(lectureId);
+    }
+
+
 }

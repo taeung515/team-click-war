@@ -3,6 +3,7 @@ package github.nbcamp.lectureflow.domain.lectureMember.controller;
 
 import github.nbcamp.lectureflow.domain.lectureMember.dto.request.CreateLectureMemberRequest;
 import github.nbcamp.lectureflow.domain.lectureMember.dto.response.CreateLectureMemberResponse;
+import github.nbcamp.lectureflow.domain.lectureMember.dto.response.LectureEnrollCountResponse;
 import github.nbcamp.lectureflow.domain.lectureMember.dto.response.LectureMemberListResponse;
 import github.nbcamp.lectureflow.domain.lectureMember.service.LectureMemberQueryService;
 import github.nbcamp.lectureflow.domain.lectureMember.service.LectureMemberService;
@@ -28,6 +29,13 @@ public class LectureMemberController {
     public ResponseEntity<ApiResponse<List<LectureMemberListResponse>>> getLectureMember(@AuthenticationPrincipal Long memberId) {
         List<LectureMemberListResponse> response = lectureMemberQueryService.getLectureMember(memberId);
         return ResponseEntity.ok(ApiResponse.success("수강신청 목록 조회", response));
+    }
+
+    //특정 강의 수강신청 인원 수 조회
+    @GetMapping("/{lectureId}/count")
+    public ResponseEntity<ApiResponse<LectureEnrollCountResponse>> getLectureEnrollCount(@PathVariable Long lectureId) {
+        LectureEnrollCountResponse response = lectureMemberQueryService.getLectureEnrollCount(lectureId);
+        return ResponseEntity.ok(ApiResponse.success("해당 강의 수강신청 인원 수 조회", response));
     }
 
     @PostMapping()
