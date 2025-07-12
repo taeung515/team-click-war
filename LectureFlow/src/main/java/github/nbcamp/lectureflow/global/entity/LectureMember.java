@@ -13,7 +13,7 @@ public class LectureMember extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     //수강신청 내역 고유 ID
-    @Column(name = "lecture_member_id", nullable = false)
+    @Column(nullable = false)
     private Long id;
 
     //학생(member)
