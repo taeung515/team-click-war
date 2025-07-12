@@ -14,7 +14,7 @@ public class LectureMember extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     //수강신청 내역 고유 ID
     @Column(name = "lecture_member_id", nullable = false)
-    private Long lectureMemberId;
+    private Long id;
 
     //학생(member)
     @ManyToOne(fetch = FetchType.LAZY)
