@@ -25,7 +25,7 @@ public class LectureService {
 
     public void createLectures(MultipartFile multipartFile) throws IOException {
         InputStream inputStream = multipartFile.getInputStream();
-        List<LectureUploadRequestDto> lectureRequestDtoList = ExcelUpload.exelToLecture(inputStream);
+        List<LectureUploadRequestDto> lectureRequestDtoList = FileUpload.fileToLecture(inputStream);
         List<Lecture> lectureList = lectureRequestDtoList.stream().map(lectureUploadRequestDto -> Lecture.of(
                 lectureUploadRequestDto.getMajorOrGeneral(),
                 lectureUploadRequestDto.getDepartment(),

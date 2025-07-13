@@ -7,10 +7,7 @@ import github.nbcamp.lectureflow.global.enums.Department;
 import github.nbcamp.lectureflow.global.enums.MajorOrGeneral;
 import github.nbcamp.lectureflow.global.exception.ErrorCode;
 import org.apache.poi.openxml4j.exceptions.NotOfficeXmlFileException;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,11 +17,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ExcelUpload {
-    public static List<LectureUploadRequestDto> exelToLecture(InputStream inputStream) {
+public class FileUpload {
+    public static List<LectureUploadRequestDto> fileToLecture(InputStream inputStream) {
 
         try {
-            Workbook workbook = new XSSFWorkbook(inputStream);
+            Workbook workbook = WorkbookFactory.create(inputStream);
             Sheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rowIterator = sheet.iterator();
             int rowNumber = 0;

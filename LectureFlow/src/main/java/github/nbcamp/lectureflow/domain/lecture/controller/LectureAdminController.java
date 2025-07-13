@@ -17,7 +17,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Secured("ROLE_ADMIN")
 @RequestMapping("/admin")
-public class LectureController {
+public class LectureAdminController {
     private final LectureService lectureService;
 
     @PostMapping("/lectures/upload")
