@@ -62,7 +62,7 @@ public class LectureMemberServiceImpl implements LectureMemberService {
         //수강 신청
         lectureMemberRepository.save(lectureMember);
 
-        return new CreateLectureMemberResponse(lectureMember.getLectureMemberId(), memberId, lecture.getId());
+        return new CreateLectureMemberResponse(lectureMember.getId(), memberId, lecture.getId());
     }
 
     @Transactional
