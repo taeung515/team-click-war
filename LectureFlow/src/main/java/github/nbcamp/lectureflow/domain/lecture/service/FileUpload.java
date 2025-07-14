@@ -108,12 +108,12 @@ public class FileUpload {
                 lectureList.add(lectureRequestDtoBuilder.build());
             }
             return lectureList;
-        } catch (IOException e) {
-            // IOStream
-            throw new LectureException(ErrorCode.CANT_UPLOAD_LECTURE);
         } catch (NotOfficeXmlFileException e) {
-            //다른 확장자 파일
+            //OfficeXmlFile 형식이 아닌 경우
             throw new LectureException(ErrorCode.WRONG_TYPE_FILE);
+        }catch (IOException e) {
+            // IOStream에서의 에러
+            throw new LectureException(ErrorCode.CANT_UPLOAD_LECTURE);
         }
     }
 }
