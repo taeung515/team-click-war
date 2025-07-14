@@ -48,6 +48,7 @@ jobs:
           name: app
           path: LectureFlow/build/libs/app.jar
 
+
   # CD(배포) 구축
   deploy:
     name: Deploy to EC2
