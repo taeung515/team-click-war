@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -40,7 +41,7 @@ public class LectureService {
                 lectureUploadRequestDto.getClassroom(),
                 lectureUploadRequestDto.getMaxStudent()
         )).toList();
-        lectureRepository.saveAll(lectureList);
+        lectureRepository.createLectures(lectureList);
     }
 
     public void createLecture(LectureUploadRequestDto lectureUploadRequestDto) {
