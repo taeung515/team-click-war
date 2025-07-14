@@ -82,6 +82,6 @@ jobs:
         run: |
           scp -i ec2_key.pem -o StrictHostKeyChecking=no app.jar ubuntu@${{ secrets.EC2_HOST }}:/home/ubuntu/app.jar
           ssh -i ec2_key.pem -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-            pkill -f 'java -jar' || true
-            nohup java -jar /home/ubuntu/app.jar > /home/ubuntu/app.log 2>&1 &
+            chmod +x /home/ubuntu/start.sh
+            /home/ubuntu/start.sh
           EOF
