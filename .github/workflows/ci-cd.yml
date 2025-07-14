@@ -41,7 +41,7 @@ jobs:
       - name: 테스트 실행
         run: ./gradlew test
 
-# CD(배포) 구축
+  # CD(배포) 구축
   deploy:
     name: Deploy to EC2
     runs-on: ubuntu-latest
@@ -66,7 +66,7 @@ jobs:
       # EC2 서버에 jar 배포 및 실행
       - name: Deploy to EC2 SSH
         run: |
-          scp -i ec2_key.pem -o StrictHostKeyChecking=no build/libs/*.jar ubuntu@${{ secrets.EC2_HOST }}:/home/ubuntu/app.jar
+          scp -i ec2_key.pem -o StrictHostKeyChecking=no LectureFlow/build/libs/*.jar ubuntu@${{ secrets.EC2_HOST }}:/home/ubuntu/app.jar
           ssh -i ec2_key.pem -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
             pkill -f 'java -jar' || true
             nohup java -jar /home/ubuntu/app.jar > /home/ubuntu/app.log 2>&1 &
