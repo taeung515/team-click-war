@@ -5,19 +5,19 @@ import github.nbcamp.lectureflow.domain.lecture.dto.request.LectureUploadRequest
 import github.nbcamp.lectureflow.domain.lecture.service.LectureService;
 import github.nbcamp.lectureflow.domain.response.LectureResponse;
 import github.nbcamp.lectureflow.global.dto.ApiResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
 @Secured("ROLE_ADMIN")
 @RequestMapping("/admin")
-public class LectureController {
+public class LectureAdminController {
     private final LectureService lectureService;
 
     @PostMapping("/lectures/upload")
@@ -28,7 +28,7 @@ public class LectureController {
     }
 
     @PostMapping("/lectures")
-    public ResponseEntity<ApiResponse<Void>> createLecture(@RequestBody LectureUploadRequestDto lectureUploadRequestDto) {
+    public ResponseEntity<ApiResponse<Void>> createLecture(@Valid @RequestBody LectureUploadRequestDto lectureUploadRequestDto) {
         lectureService.createLecture(lectureUploadRequestDto);
 
         return ResponseEntity.ok(ApiResponse.success(LectureResponse.LECTURE_UPLOAD_SUCCESS.getMessage(), null));

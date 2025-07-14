@@ -9,7 +9,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,5 +54,12 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ApiResponse<Void>> handleException(Exception e) {
         log.error("Unexpected error: ", e);
         return ResponseEntity.status(ErrorCode.INTERNAL_SERVER_ERROR.getStatus()).body(ApiResponse.error(ErrorCode.INTERNAL_SERVER_ERROR.getMsg()));
+    }
+
+    // 크기 초과 파일 예외처리
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    protected ResponseEntity<ApiResponse<Void>> handleMaxFileSizeExceededException(MaxUploadSizeExceededException e) {
+        log.error("Exception occurred: ", e);
+        return ResponseEntity.status(ErrorCode.TOO_BIG_FILE.getStatus()).body(ApiResponse.error(ErrorCode.TOO_BIG_FILE.getMsg()));
     }
 }
