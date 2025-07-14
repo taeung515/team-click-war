@@ -12,7 +12,7 @@ import github.nbcamp.lectureflow.global.entity.Lecture;
 import github.nbcamp.lectureflow.global.entity.LectureMember;
 import github.nbcamp.lectureflow.global.entity.Member;
 import github.nbcamp.lectureflow.global.exception.ErrorCode;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,18 +29,19 @@ public class LectureMemberServiceImpl implements LectureMemberService {
     @Transactional
     @Override
     public CreateLectureMemberResponse createLectureMember(CreateLectureMemberRequest request, Long memberId) {
+
+        //Lecture 먼저 락 걸고 강의 조회
+        Lecture lecture = lectureRepository.findByIdWithPessimisticLock(request.getLectureId())
+                .orElseThrow(() -> new LectureException(ErrorCode.LECTURE_NOT_FOUND));
         //회원 조회
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new AuthException(ErrorCode.MEMBER_NOT_FOUND));
 
-        //강의 조회
-        Lecture lecture = lectureRepository.findById(request.getLectureId())
-                .orElseThrow(() -> new LectureException(ErrorCode.LECTURE_NOT_FOUND));
+        //수강신청 정원 초과 확인 로직.
+        Long count = lectureMemberRepository.countByLectureIdWithLock(lecture.getId());
 
-        //정원 초과 확인 로직
-        boolean overCapacity = checkStudent(lecture.getMaxStudent(), lecture.getId());
 
-        if (overCapacity) {
+        if (count>= lecture.getMaxStudent()) {
             throw new LectureMemberException(ErrorCode.OVER_CAPACITY);
         }
 
@@ -81,13 +82,6 @@ public class LectureMemberServiceImpl implements LectureMemberService {
     }
 
 
-
-
-
-    //수강 정원 초과 확인 메서드
-    public boolean checkStudent(int maxStudent, Long lectureId) {
-        return lectureMemberRepository.countByLectureId(lectureId) >= maxStudent;
-    }
 
     //재수강 확인 메서드
     public List<LectureMember> checkRetake(Long memberId, Long lectureId) {
