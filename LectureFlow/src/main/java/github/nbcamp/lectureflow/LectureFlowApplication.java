@@ -7,9 +7,7 @@ import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
 import static org.springframework.data.web.config.EnableSpringDataWebSupport.PageSerializationMode.VIA_DTO;
 
-@EnableCaching
 @SpringBootApplication
-@EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)
 public class LectureFlowApplication {
 
     public static void main(String[] args) {

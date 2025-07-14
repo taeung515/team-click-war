@@ -4,6 +4,7 @@ import github.nbcamp.lectureflow.domain.keyword.dto.TopTenResponse;
 import github.nbcamp.lectureflow.domain.keyword.repository.KeywordRepository;
 import github.nbcamp.lectureflow.global.entity.Keyword;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -43,4 +44,8 @@ public class KeywordServiceImpl implements KeywordService {
     public void deleteOldKeywords() {
         keywordRepository.deleteOldKeywords();
     }
+
+    @Scheduled(fixedRate = 1800000) // 30분
+    @CacheEvict(value = "topKeywords", allEntries = true)
+    public void evictTopKeywordsCache() {}
 }

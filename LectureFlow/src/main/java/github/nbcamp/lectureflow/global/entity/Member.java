@@ -1,6 +1,6 @@
 package github.nbcamp.lectureflow.global.entity;
 
-import github.nbcamp.lectureflow.domain.user.enums.Role;
+import github.nbcamp.lectureflow.domain.member.enums.Role;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

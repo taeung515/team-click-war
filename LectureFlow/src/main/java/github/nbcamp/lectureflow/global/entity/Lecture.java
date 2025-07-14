@@ -1,9 +1,9 @@
 package github.nbcamp.lectureflow.global.entity;
 
 import github.nbcamp.lectureflow.domain.lecture.dto.request.LectureUploadRequestDto;
-import github.nbcamp.lectureflow.global.enums.Day;
-import github.nbcamp.lectureflow.global.enums.Department;
-import github.nbcamp.lectureflow.global.enums.MajorOrGeneral;
+import github.nbcamp.lectureflow.domain.lecture.enums.Day;
+import github.nbcamp.lectureflow.domain.lecture.enums.Department;
+import github.nbcamp.lectureflow.domain.lecture.enums.MajorOrGeneral;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

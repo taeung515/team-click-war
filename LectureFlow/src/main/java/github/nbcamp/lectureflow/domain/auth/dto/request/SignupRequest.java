@@ -1,6 +1,6 @@
 package github.nbcamp.lectureflow.domain.auth.dto.request;
 
-import github.nbcamp.lectureflow.domain.user.enums.Role;
+import github.nbcamp.lectureflow.domain.member.enums.Role;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

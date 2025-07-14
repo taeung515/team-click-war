@@ -1,6 +1,6 @@
 package github.nbcamp.lectureflow.domain.lecture.dto.request;
 
-import github.nbcamp.lectureflow.global.enums.MajorOrGeneral;
+import github.nbcamp.lectureflow.domain.lecture.enums.MajorOrGeneral;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

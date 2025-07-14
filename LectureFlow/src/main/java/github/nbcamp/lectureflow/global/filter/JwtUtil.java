@@ -1,6 +1,6 @@
 package github.nbcamp.lectureflow.global.filter;
 
-import github.nbcamp.lectureflow.domain.user.enums.Role;
+import github.nbcamp.lectureflow.domain.member.enums.Role;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;

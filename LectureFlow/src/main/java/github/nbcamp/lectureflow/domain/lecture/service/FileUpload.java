@@ -2,13 +2,13 @@ package github.nbcamp.lectureflow.domain.lecture.service;
 
 import github.nbcamp.lectureflow.domain.lecture.dto.request.LectureUploadRequestDto;
 import github.nbcamp.lectureflow.domain.lecture.exception.LectureException;
-import github.nbcamp.lectureflow.global.enums.Day;
-import github.nbcamp.lectureflow.global.enums.Department;
-import github.nbcamp.lectureflow.global.enums.MajorOrGeneral;
+import github.nbcamp.lectureflow.domain.lecture.enums.Day;
+import github.nbcamp.lectureflow.domain.lecture.enums.Department;
+import github.nbcamp.lectureflow.domain.lecture.enums.MajorOrGeneral;
 import github.nbcamp.lectureflow.global.exception.ErrorCode;
 import org.apache.poi.openxml4j.exceptions.NotOfficeXmlFileException;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.DateTimeException;

@@ -3,9 +3,9 @@ package github.nbcamp.lectureflow.domain.lecture.dto.response;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.querydsl.core.annotations.QueryProjection;
 import github.nbcamp.lectureflow.global.entity.Lecture;
-import github.nbcamp.lectureflow.global.enums.Day;
-import github.nbcamp.lectureflow.global.enums.Department;
-import github.nbcamp.lectureflow.global.enums.MajorOrGeneral;
+import github.nbcamp.lectureflow.domain.lecture.enums.Day;
+import github.nbcamp.lectureflow.domain.lecture.enums.Department;
+import github.nbcamp.lectureflow.domain.lecture.enums.MajorOrGeneral;
 import lombok.Getter;
 
 import java.time.LocalTime;
