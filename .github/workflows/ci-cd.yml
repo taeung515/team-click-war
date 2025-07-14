@@ -46,7 +46,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app
-          path: build/libs/app.jar
+          path: LectureFlow/build/libs/app.jar
+
 
   # CD(배포) 구축
   deploy:
