@@ -72,6 +72,6 @@ tasks.named('test') {
 }
 
 bootJar {
-    archiveFileName = 'app.jar' // 💡 배포 시 명확한 이름으로 고정
+    archiveFileName = 'app.jar' // 배포 시 명확한 이름으로 고정
 }
 
