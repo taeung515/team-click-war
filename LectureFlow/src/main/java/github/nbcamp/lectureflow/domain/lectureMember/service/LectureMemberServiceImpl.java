@@ -39,7 +39,11 @@ public class LectureMemberServiceImpl implements LectureMemberService {
 
         //Lecture 먼저 락 걸고 강의 조회
         Lecture lecture = lectureRepository.findByIdWithPessimisticLock(request.getLectureId())
-                .orElseThrow(() -> new LectureException(ErrorCode.LECTURE_NOT_FOUND));
+                .orElseGet(() -> {
+                    log.error(LECTURE_MEMBER_FAILED,"LectureId: {}와 일치하는 강의가 없습니다",request.getLectureId());
+                    throw new LectureException(ErrorCode.LECTURE_NOT_FOUND);
+                });
+
         //회원 조회
         Member member = memberRepository.findById(memberId)
                 .orElseGet(() ->{
@@ -51,19 +55,10 @@ public class LectureMemberServiceImpl implements LectureMemberService {
         //수강신청 정원 초과 확인 로직.
         Long count = lectureMemberRepository.countByLectureIdWithLock(lecture.getId());
 
-        //강의 조회
-        Lecture lecture = lectureRepository.findById(request.getLectureId())
-                .orElseGet(() -> {
-                    log.error(LECTURE_MEMBER_FAILED,"LectureId: {}와 일치하는 강의가 없습니다",request.getLectureId());
-                    throw new LectureException(ErrorCode.LECTURE_NOT_FOUND);
-                });
-
-
-
 
         if (count>= lecture.getMaxStudent()) {
-            throw new LectureMemberException(ErrorCode.OVER_CAPACITY);
             log.error(LECTURE_MEMBER_FAILED,"LectureName: {} 강의의 정원이 초과되었습니다",lecture.getLectureName());
+            throw new LectureMemberException(ErrorCode.OVER_CAPACITY);
         }
 
         // 과거 수강 여부 확인
@@ -111,10 +106,8 @@ public class LectureMemberServiceImpl implements LectureMemberService {
     }
 
 
-
     //재수강 확인 메서드
     public List<LectureMember> checkRetake(Long memberId, Long lectureId) {
         return lectureMemberRepository.findAllByMemberIdAndLectureId(memberId, lectureId);
-
     }
 }
