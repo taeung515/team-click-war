@@ -1,7 +1,7 @@
 package github.nbcamp.lectureflow.domain.member.dto.response;
 
 import github.nbcamp.lectureflow.global.entity.Member;
-import github.nbcamp.lectureflow.domain.user.enums.Role;
+import github.nbcamp.lectureflow.domain.member.enums.Role;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

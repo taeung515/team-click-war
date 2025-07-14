@@ -1,4 +1,4 @@
-package github.nbcamp.lectureflow.global.enums;
+package github.nbcamp.lectureflow.domain.lecture.enums;
 
 import lombok.Getter;
 

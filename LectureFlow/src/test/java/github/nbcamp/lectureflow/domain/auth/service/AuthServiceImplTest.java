@@ -6,7 +6,7 @@ import github.nbcamp.lectureflow.domain.auth.dto.response.SigninResponse;
 import github.nbcamp.lectureflow.domain.auth.dto.response.SignupResponse;
 import github.nbcamp.lectureflow.domain.auth.exception.AuthException;
 import github.nbcamp.lectureflow.domain.auth.repository.AuthRepository;
-import github.nbcamp.lectureflow.domain.user.enums.Role;
+import github.nbcamp.lectureflow.domain.member.enums.Role;
 import github.nbcamp.lectureflow.global.entity.Member;
 import github.nbcamp.lectureflow.global.filter.JwtUtil;
 import org.junit.jupiter.api.Test;

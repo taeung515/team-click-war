@@ -1,8 +1,8 @@
 package github.nbcamp.lectureflow.domain.lecture.dto.request;
 
-import github.nbcamp.lectureflow.global.enums.Day;
-import github.nbcamp.lectureflow.global.enums.Department;
-import github.nbcamp.lectureflow.global.enums.MajorOrGeneral;
+import github.nbcamp.lectureflow.domain.lecture.enums.Day;
+import github.nbcamp.lectureflow.domain.lecture.enums.Department;
+import github.nbcamp.lectureflow.domain.lecture.enums.MajorOrGeneral;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
