@@ -53,7 +53,7 @@ public class LectureService {
                         .map(Lecture::getLectureName)
                         .collect(Collectors.joining(", "))
         );
-        lectureRepository.saveAll(lectureList);
+        lectureRepository.createLectures(lectureList);
     }
 
     public void createLecture(LectureUploadRequestDto lectureUploadRequestDto) {

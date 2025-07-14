@@ -19,7 +19,7 @@ spring:
       on-profile: dev
 
   datasource:
-    url: jdbc:mysql://localhost:3306/${DB_SCHEMA}
+    url: jdbc:mysql://localhost:3306/${DB_SCHEMA}?rewriteBatchedStatements=true
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
