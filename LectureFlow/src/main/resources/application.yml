@@ -13,8 +13,8 @@ spring:
 
   datasource:
     url: jdbc:mysql://localhost:3306/lectureflow
-    username: root
-    password: dbsghwns1!
+    username: dldudwo
+    password: 1118
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
