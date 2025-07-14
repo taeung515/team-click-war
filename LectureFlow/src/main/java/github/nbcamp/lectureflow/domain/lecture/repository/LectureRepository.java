@@ -8,11 +8,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
+import java.util.List;
 
-public interface LectureRepository extends JpaRepository<Lecture, Long>, LectureQueryRepository {
+public interface LectureRepository extends JpaRepository<Lecture, Long>, LectureQueryRepository, LectureJdbcRepository {
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT l FROM Lecture l WHERE l.id = :lectureId")
     Optional<Lecture> findByIdWithPessimisticLock(@Param("lectureId") Long lectureId);
-
 }

@@ -10,16 +10,20 @@ spring:
 app:
   jwt-secret: ${SECRET_KEY}
   jwt-expiration-milliseconds: 86400000
+
 ---
+
 spring:
   config:
     activate:
       on-profile: dev
+
   datasource:
-    url: jdbc:mysql://localhost:3306/${DB_SCHEMA}
+    url: jdbc:mysql://localhost:3306/${DB_SCHEMA}?rewriteBatchedStatements=true
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
     defer-datasource-initialization: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
@@ -29,3 +33,5 @@ spring:
       hibernate.default_batch_fetch_size: 1000
     open-in-view: false
     show-sql: true
+
+---
