@@ -150,7 +150,53 @@ public class ApiResponse<T> {
 
 <details><summary>API 명세서
 </summary>
-- 추가 예정
+ 
+ ## 🔐Auth
+
+| Method | URL          | 설명         | Request 예시 | Response 예시|
+|--------|--------------|--------------|---------|----------|
+| POST   | /auth/signup | 회원가입  | {<br> "email": "student@example.com", <br> "password": "testPassword456!", <br> "name": "홍길동",<br> "phone": "010-1234-5678", <br> "role": "STUDENT"<br>} <br> | {<br>"success": true, <br>"message": "회원가입 성공",<br>"data": {<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "memberId": 1<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>"timestamp": "2025-07-09T11:17:15.0377381"<br>}|
+| POST | /auth/signin | 로그인  | {<br> "email": "student@example.com",<br> "password": "testPassword123!"<br>} | {<br> "success": true,<br> "message": "로그인 성공",<br> "data": {<br> &nbsp;&nbsp;"memberId": 1,<br> &nbsp;&nbsp;"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLtmY3quLjrj5kiLCJtZW1iZXJJZCI6MSwiYXV0aCI6IlNUVURFTlQiLCJleHAiOjE3NTIxMTQxODgsImlhdCI6MTc1MjAyNzc4OH0.COQn16rWAvXqdo0wfijWIgRt7i-56avIq_Lyo_zX9HM"<br> &nbsp;&nbsp;&nbsp; },<br> "timestamp": "2025-07-09T11:23:08.9962236"<br>} |
+
+<br><br>
+## 👤Member
+| Method | URL          | 설명         | Request 예시 | Response 예시|
+|--------|--------------|--------------|---------|----------|
+| GET | /members/me | 내 정보 조회 |  | {<br> "success": true,<br> "message": "내 정보 조회 성공",<br> "data": {<br> &nbsp;&nbsp;"memberId": 1,<br> &nbsp;&nbsp;"email": "student@naver.com",<br> &nbsp;&nbsp;"name": "윤호준",<br> &nbsp;&nbsp;"phone": "010-1234-5678",<br> &nbsp;&nbsp;"role": "STUDENT"<br> },<br> "timestamp": "2025-07-09T12:10:00.123456"<br>} |
+| PUT | /members/me | 회원 정보 수정 | {<br> "name": "윤호준",<br> "phone": "010-1234-5678",<br> "password": "Pw1235678!"<br>} | {<br> "success": true,<br> "message": "회원 정보 수정 완료",<br> "data": null,<br> "timestamp": "2025-07-09T12:10:00.123456"<br>} |
+| DELETE | /members/withdraw | 회원 탈퇴 | {<br> "password": "Password123!"<br>} | {<br> "success": true",<br> "message": "회원 탈퇴 완료",<br> "data": null,<br> "timestamp": "2025-07-09T12:10:00.123456"<br>} |
+
+<br><br>
+## 🗂️Keyword
+| Method | URL          | 설명         | Request 예시 | Response 예시|
+|--------|--------------|--------------|---------|----------|
+| GET | /keywords/v1/popular | 인기 검색어 상위 10개 조회 | | {<br> "success": true,<br> "message": "탑 10 인기 검색어 조회 성공",<br> "data": {<br> &nbsp;&nbsp;"topTenKeywords": [<br> &nbsp;&nbsp;&nbsp;&nbsp;"과학",<br> &nbsp;&nbsp;&nbsp;&nbsp;"인공지능",<br> &nbsp;&nbsp;&nbsp;&nbsp;"데이터베이스",<br> &nbsp;&nbsp;&nbsp;&nbsp;"자바",<br> &nbsp;&nbsp;&nbsp;&nbsp;"쿠버네티스",<br> &nbsp;&nbsp;&nbsp;&nbsp;"리액트",<br> &nbsp;&nbsp;&nbsp;&nbsp;"알고리즘",<br> &nbsp;&nbsp;&nbsp;&nbsp;"파이썬",<br> &nbsp;&nbsp;&nbsp;&nbsp;"마이크로서비스",<br> &nbsp;&nbsp;&nbsp;&nbsp;"Redis"<br> &nbsp;&nbsp;]<br> },<br> "timestamp": "2025-07-14T19:29:44.1534889"<br>} |
+| GET | /keywords/v2/popular | 인기 검색어 상위 10개 조회 v2 캐시 사용 | | {<br> "success": true,<br> "message": "탑 10 인기 검색어 조회 성공",<br> "data": {<br> &nbsp;&nbsp;"topTenKeywords": [<br> &nbsp;&nbsp;&nbsp;&nbsp;"과학",<br> &nbsp;&nbsp;&nbsp;&nbsp;"인공지능",<br> &nbsp;&nbsp;&nbsp;&nbsp;"데이터베이스",<br> &nbsp;&nbsp;&nbsp;&nbsp;"자바",<br> &nbsp;&nbsp;&nbsp;&nbsp;"쿠버네티스",<br> &nbsp;&nbsp;&nbsp;&nbsp;"리액트",<br> &nbsp;&nbsp;&nbsp;&nbsp;"알고리즘",<br> &nbsp;&nbsp;&nbsp;&nbsp;"파이썬",<br> &nbsp;&nbsp;&nbsp;&nbsp;"마이크로서비스",<br> &nbsp;&nbsp;&nbsp;&nbsp;"Redis"<br> &nbsp;&nbsp;]<br> },<br> "timestamp": "2025-07-14T19:29:44.1534889"<br>} |
+
+
+<br><br>
+## 🗣️Lecture
+| Method | URL          | 설명         | Request 예시 | Response 예시|
+|--------|--------------|--------------|---------|----------|
+| POST | /admin/lectures/upload | 강의 엑셀 업로드 등록 | .xlsx 파일 업로드 | {<br> "success": true,<br> "message": "강의를 성공적으로 업로드했습니다.",<br> "data": null,<br> "timestamp": "2025-07-09T11:17:15.0377381"<br>} |
+| POST | /admin/lectures | 강의 단건 등록 | {<br> "department": "COMPUTER_SCIENCE_ENGINEERING",<br> "gradeLevel": 2,<br> "isForeignLanguage": false,<br> "lectureName": "자료구조",<br> "grade": 3,<br> "professor": "김철수",<br> "day": "TUE",<br> "startTime": "13:00:00",<br> "endTime": "15:00:00",<br> "classroom": 1301,<br> "maxStudent": 40<br>} | {<br> "success": true,<br> "message": "강의를 성공적으로 업로드했습니다.",<br> "data": null,<br> "timestamp": "2025-07-09T11:17:15.0377381"<br>} |
+| PATCH | /admin/lectures/{lectureId} | 개별 강의 수정 | {<br> "department": "COMPUTER_SCIENCE_ENGINEERING",<br> "professor": "김영희"<br>} | {<br> "success": true,<br> "message": "강의를 성공적으로 수정했습니다.",<br> "data": null,<br> "timestamp": "2025-06-18T10:45:33Z"<br>} |
+| DELETE | /admin/lectures/{lectureId} | 개별 강의 삭제 |  | {<br> "success": true,<br> "message": "강의 삭제",<br> "data": null,<br> "timestamp": "2025-07-09T11:17:15.0377381"<br>} |
+| GET | /lectures/{lectureId} | 강의 단건 조회 |  | {<br> "success": true,<br> "message": "Lecture 조회 성공",<br> "data": {<br> &nbsp;&nbsp;"lectureId": 1,<br> &nbsp;&nbsp;"majorOrGeneral": "MAJOR",<br> &nbsp;&nbsp;"department": "COMPUTER_SCIENCE_ENGINEERING",<br> &nbsp;&nbsp;"gradeLevel": 1,<br> &nbsp;&nbsp;"lectureName": "컴퓨터개론",<br> &nbsp;&nbsp;"grade": 1,<br> &nbsp;&nbsp;"professor": "김철수",<br> &nbsp;&nbsp;"day": "MON",<br> &nbsp;&nbsp;"startTime": "09:00",<br> &nbsp;&nbsp;"endTime": "10:15",<br> &nbsp;&nbsp;"classroom": "101",<br> &nbsp;&nbsp;"maxStudent": 40,<br> &nbsp;&nbsp;"foreignLanguage": false<br> },<br> "timestamp": "2025-07-10T12:17:51.8790942"<br>} |
+| GET | /lectures/search?keyword=value&majorOrGeneral=MAJOR,GENERAL | 조건에 따른 강의 목록 조회 | | {<br> "success": true,<br> "message": "Lectures 조회 성공",<br> "data": {<br> &nbsp;&nbsp;"content": [ ... 5개 강의 객체 ... ],<br> &nbsp;&nbsp;"page": {<br> &nbsp;&nbsp;&nbsp;&nbsp;"size": 5,<br> &nbsp;&nbsp;&nbsp;&nbsp;"number": 0,<br> &nbsp;&nbsp;&nbsp;&nbsp;"totalElements": 5,<br> &nbsp;&nbsp;&nbsp;&nbsp;"totalPages": 1<br> &nbsp;&nbsp;}<br> },<br> "timestamp": "2025-07-10T17:01:40.3826776"<br>} |
+
+
+<br><br>
+## ✏️LectureMember
+| Method | URL          | 설명         | Request 예시 | Response 예시|
+|--------|--------------|--------------|---------|----------|
+| POST | /lectures/enroll | 수강신청 | {<br> "lectureId": 4<br>} | {<br> "success": true,<br> "message": "수강신청 완료",<br> "data": {<br> &nbsp;&nbsp;"lectureMemberId": 2,<br> &nbsp;&nbsp;"memberId": 4,<br> &nbsp;&nbsp;"lectureId": 5<br> },<br> "timestamp": "2025-07-09T11:17:15.0377381"<br>} |
+| GET | /lectures/enroll | 로그인한 사용자의 수강 과목 전체 조회 |  | {<br> "success": true,<br> "message": "수강신청 목록 조회",<br> "data": [<br> &nbsp;&nbsp;{ "id": 1, "lectureId": 2, "lectureName": "논리학 개론", ... },<br> &nbsp;&nbsp;{ "id": 3, "lectureId": 3, "lectureName": "화학 실험", ... },<br> &nbsp;&nbsp;{ "id": 4, "lectureId": 1, "lectureName": "웹 프로그래밍", ... }<br> ],<br> "timestamp": "2025-07-12T14:44:26.4098048"<br>} |
+| GET | /lectures/enroll/{lectureId}/count | 특정 강의 수강신청 인원 수 조회 |  | {<br> "success": true,<br> "message": "해당 강의 수강신청 인원 수 조회",<br> "data": {<br> &nbsp;&nbsp;"lectureId": 2,<br> &nbsp;&nbsp;"maxStudent": 25,<br> &nbsp;&nbsp;"student": 1<br> },<br> "timestamp": "2025-07-12T15:37:47.0010355"<br>} |
+| DELETE | /lectures/enroll/{lectureMemberId} | 수강신청 취소 |  | {<br> "success": true,<br> "message": "수강신청 취소",<br> "data": null,<br> "timestamp": "2025-07-09T11:17:15.0377381"<br>} |
+
+
+[✏️API 명세서 상세 (notion으로 이동)](https://www.notion.so/teamsparta/API-22a2dc3ef51480a2b5dcd9bee3b33d1e)
 </details>
 <br/><br/>
 
