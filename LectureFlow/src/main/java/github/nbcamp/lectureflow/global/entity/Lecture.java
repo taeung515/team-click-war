@@ -8,6 +8,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -69,6 +71,9 @@ public class Lecture extends BaseEntity {
     //제한 인원
     @Column(name = "max_student", nullable = false)
     private Integer maxStudent;
+
+    @OneToMany(mappedBy = "lecture", cascade = CascadeType.REMOVE)
+    private List<LectureMember> lectureMembers = new ArrayList<>();
 
     public static Lecture of(MajorOrGeneral majorOrGeneral, Department department, Integer gradeLevel, Boolean isForeignLanguage, String lectureName, Integer grade, String professor, Day day, LocalTime startTime, LocalTime endTime, Integer classroom, Integer maxStudent) {
         Lecture lecture = new Lecture();
