@@ -105,6 +105,11 @@ public class LectureMemberServiceImpl implements LectureMemberService {
         lectureMemberRepository.delete(lectureMember);
     }
 
+    @Transactional
+    public void deleteLectureMemberByLecture(Lecture lecture) {
+        lectureMemberRepository.deleteLectureMemberByLecture(lecture);
+    }
+
 
     //재수강 확인 메서드
     public List<LectureMember> checkRetake(Long memberId, Long lectureId) {

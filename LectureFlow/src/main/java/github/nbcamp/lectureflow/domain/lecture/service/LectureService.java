@@ -4,6 +4,7 @@ import github.nbcamp.lectureflow.domain.lecture.dto.request.LectureUpdateRequest
 import github.nbcamp.lectureflow.domain.lecture.dto.request.LectureUploadRequestDto;
 import github.nbcamp.lectureflow.domain.lecture.exception.LectureException;
 import github.nbcamp.lectureflow.domain.lecture.repository.LectureRepository;
+import github.nbcamp.lectureflow.domain.lectureMember.service.LectureMemberService;
 import github.nbcamp.lectureflow.global.entity.Lecture;
 import github.nbcamp.lectureflow.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.slf4j.MarkerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -25,11 +27,12 @@ import java.util.stream.Collectors;
 @Transactional
 public class LectureService {
 
-    private final LectureRepository lectureRepository;
-    private final DtoNullIgnoreMapper dtoNullIgnoreMapper;
     private static final Logger log = LoggerFactory.getLogger("LectureService.class");
     private static final Marker LECTURE_SERVICE_SUCCESS = MarkerFactory.getMarker("Success");
     private static final Marker LECTURE_SERVICE_FAILED = MarkerFactory.getMarker("Failed");
+    private final LectureRepository lectureRepository;
+    private final DtoNullIgnoreMapper dtoNullIgnoreMapper;
+    private final LectureMemberService lectureMemberService;
 
     public void createLectures(MultipartFile multipartFile) throws IOException {
         InputStream inputStream = multipartFile.getInputStream();
@@ -48,7 +51,7 @@ public class LectureService {
                 lectureUploadRequestDto.getClassroom(),
                 lectureUploadRequestDto.getMaxStudent()
         )).toList();
-        log.info(LECTURE_SERVICE_SUCCESS,"Lectures: {}가 생성되었습니다.",
+        log.info(LECTURE_SERVICE_SUCCESS, "Lectures: {}가 생성되었습니다.",
                 lectureList.stream()
                         .map(Lecture::getLectureName)
                         .collect(Collectors.joining(", "))
@@ -58,7 +61,7 @@ public class LectureService {
 
     public void createLecture(LectureUploadRequestDto lectureUploadRequestDto) {
         Lecture lecture = Lecture.of(lectureUploadRequestDto);
-        log.info(LECTURE_SERVICE_SUCCESS,"Lecture: {}가 생성되었습니다.",lecture.getLectureName());
+        log.info(LECTURE_SERVICE_SUCCESS, "Lecture: {}가 생성되었습니다.", lecture.getLectureName());
         lectureRepository.save(lecture);
 
     }
@@ -71,7 +74,7 @@ public class LectureService {
             throw new LectureException(ErrorCode.LECTURE_NOT_FOUND);
 
         Lecture lecture = optionalLecture.get();
-        log.info(LECTURE_SERVICE_SUCCESS,"Lecture: {}가 수정되었습니다.",lecture.getLectureName());
+        log.info(LECTURE_SERVICE_SUCCESS, "Lecture: {}가 수정되었습니다.", lecture.getLectureName());
         dtoNullIgnoreMapper.updateLecture(lectureUpdateRequestDto, lecture);
 
 
@@ -79,11 +82,9 @@ public class LectureService {
 
     public void deleteLecture(Long lectureId) {
         //해당 데이터 존재 여부 확인
-        if (!lectureRepository.existsById(lectureId)) {
-            log.error(LECTURE_SERVICE_FAILED,"LectureId: {}가 존재하지 않습니다",lectureId);
-            throw new LectureException(ErrorCode.LECTURE_NOT_FOUND);
-        }
-        log.info(LECTURE_SERVICE_FAILED,"LectureId: {}가 삭제되었습니다.",lectureId);
+        Lecture lecture = lectureRepository.findById(lectureId).orElseThrow(() -> new LectureException(ErrorCode.LECTURE_NOT_FOUND));
+        lectureMemberService.deleteLectureMemberByLecture(lecture); // 연관관계 삭제
+        log.info(LECTURE_SERVICE_FAILED, "LectureId: {}가 삭제되었습니다.", lectureId);
         lectureRepository.deleteById(lectureId);
     }
 }

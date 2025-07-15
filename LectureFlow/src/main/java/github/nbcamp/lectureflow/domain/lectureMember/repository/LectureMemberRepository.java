@@ -1,5 +1,6 @@
 package github.nbcamp.lectureflow.domain.lectureMember.repository;
 
+import github.nbcamp.lectureflow.global.entity.Lecture;
 import github.nbcamp.lectureflow.global.entity.LectureMember;
 import jakarta.persistence.LockModeType;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,6 +19,5 @@ public interface LectureMemberRepository extends JpaRepository<LectureMember, Lo
     Long countByLectureIdWithLock(@Param("lectureId") Long lectureId);
 
 
-
-
+    void deleteLectureMemberByLecture(Lecture lecture);
 }
